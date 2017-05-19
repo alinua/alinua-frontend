@@ -1,0 +1,90 @@
+<section class="card">
+    <aside>
+        <i ng-hide="user.pictureUrl" class="fa fa-address-card fa-5x fa-fw"></i>
+        <img ng-show="user.pictureUrl" data-ng-src="{{ user.pictureUrl }}" />
+    </aside>
+
+    <header>
+        <h1>{{ user.firstName }} {{ user.lastName | uppercase }}</h1>
+
+        <h2>{{ user.headline }}</h2>
+
+        <h3 ng-show="user.emailAddress">
+            <a href="mailto:{{ user.emailAddress }}">
+                <i class="fa fa-envelope-o fa-fw"></i>
+                {{ user.emailAddress }}
+            </a>
+        </h3>
+    </header>
+
+    <article ng-show="user.location || user.industry">
+        <header>
+            <h1>Informations</h1>
+        </header>
+
+        <ul>
+            <li ng-show="user.location">
+                <i class="fa fa-map-marker fa-fw"></i>
+                {{ user.location.name }}
+            </li>
+
+            <li ng-show="user.industry">
+                <i class="fa fa-industry fa-fw"></i>
+                {{ user.industry }}
+            </li>
+        </ul>
+    </article>
+
+    <article ng-show="user.summary">
+        <header>
+            <h1>Summary</h1>
+        </header>
+
+        <p>{{ user.summary }}</p>
+    </article>
+
+    <article ng-show="user.specialties">
+        <header>
+            <h1>Specialties</h1>
+        </header>
+
+        <p>{{ user.specialties }}</p>
+    </article>
+
+    <article ng-show="user.positions.values">
+        <header>
+            <h1>Positions</h1>
+        </header>
+
+        <aside ng-repeat="position in user.positions.values" class="card-position {{ position.isCurrent }}">
+            <header>
+                <h1>{{ position.title }}</h1>
+
+                <h2>
+                    <span ng-show="position.startDate">
+                        <i class="fa fa-calendar fa-fw"></i>
+                        {{ position.startDate.month }}/{{ position.startDate.year }}
+                    </span>
+                    <span ng-show="position.endDate">
+                        → {{ position.endDate.month }}/{{ position.endDate.year }}
+                    </span>
+                </h2>
+            </header>
+
+            <p ng-show="position.summary">{{ position.summary }}</p>
+
+            <footer>
+                <ul>
+                    <li ng-show="position.company">
+                        <i class="fa fa-industry fa-fw"></i>
+                        {{ position.company.name }}
+                    </li>
+                    <li ng-show="position.location">
+                        <i class="fa fa-map-marker fa-fw"></i>
+                        {{ position.location.name }}
+                    </li>
+                </ul>
+            </footer>
+        </aside>
+    </article>
+</section>

@@ -1,0 +1,51 @@
+<section class="center" ng-show="loading">
+    <aside>
+        <span>
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>Loading...
+        </span>
+    </aside>
+</section>
+
+<section>
+    <header>
+        <h1>Edit job</h1>
+    </header>
+
+    <article>
+        <form name="form" ng-submit="submit(form)">
+            <span>
+                <label>Title</label>
+                <input type="text" name="title" value="{{ job.title }}" required />
+            </span>
+            <span>
+                <label>Lead</label>
+                <textarea class="no-resize" name="lead">{{ job.lead }}</textarea>
+            </span>
+            <span>
+                <label>Description</label>
+                <textarea name="description">{{ job.description }}</textarea>
+            </span>
+            <span>
+                <label>Location</label>
+                <input type="text" name="location" value="{{ job.location }}" />
+            </span>
+            <span>
+                <label>Published date</label>
+                <input type="date" name="published" value="{{ job.published }}" />
+            </span>
+            <span>
+                <label>Validity date</label>
+                <input type="date" name="validity" value="{{ job.validity }}" />
+            </span>
+
+            <input type="submit" />
+        </form>
+    </article>
+</section>
+
+<!-- Sidebar -->
+<nav>
+    <section ng-controller="SidebarController" ng-include="'view/sidebar.html'">
+        <!-- On an other side, there is a bar -->
+    </section>
+</nav>

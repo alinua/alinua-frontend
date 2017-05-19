@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+    <head>
+        <title>Alinua</title>
+
+        <!-- Normalize encoding -->
+        <meta charset="utf-8" />
+
+        <!-- Website data -->
+        <meta name="description"
+            content="AlinUA is a students social network project" />
+        <meta name="keywords"
+            content="alinua,social,students,university,java,jee,javascript" />
+        <meta name="author"
+            content="AlinUA Team" />
+
+        <!-- Website behavior -->
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1.0" />
+
+        <!-- Website icon -->
+        <link rel="shortcut icon" href="static/img/favicon.ico" />
+
+        <!-- Website appearance -->
+        <link rel="stylesheet" href="static/css/reset.css" />
+        <link rel="stylesheet" href="static/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="static/css/layout.css" />
+
+        <!-- Javascripts -->
+        <script src="static/js/jquery.min.js"></script>
+        <script src="static/js/angular.min.js"></script>
+        <script src="static/js/angular-route.js"></script>
+        <script src="static/js/angular-resource.js"></script>
+        <script src="static/js/satellizer.min.js"></script>
+
+        <script src="app.config.js"></script>
+
+        <script src="controller/home.js"></script>
+        <script src="controller/job.js"></script>
+        <script src="controller/user.js"></script>
+        <script src="controller/error.js"></script>
+        <script src="controller/admin/user.js"></script>
+        <script src="controller/admin/job.js"></script>
+    </head>
+
+    <body ng-app="alinua">
+        <!-- Header -->
+        <header>
+            <h1>
+                <a href="#!/">
+                    <i class="fa fa-paper-plane fa-fw"></i>
+                    AlinUA
+                </a>
+            </h1>
+        </header>
+
+        <!-- Navigation links -->
+        <nav ng-controller="HomeController">
+            <ul>
+                <li ng-class="{ active: path == '/' }">
+                    <a href="#!/">
+                        <i class="fa fa-home fa-fw"></i>Home
+                    </a>
+                </li>
+
+                <li ng-if="isAuthenticated()" ng-class="{ active: path == '/network' }">
+                    <a href="#!/network">
+                        <i class="fa fa-address-book fa-fw"></i>Network
+                    </a>
+                </li>
+                <li ng-if="isAuthenticated()" ng-class="{ active: path == '/profile' }">
+                    <a href="#!/profile">
+                        <i ng-hide="user.pictureUrl" class="fa fa-address-card fa-fw"></i>
+                        <img ng-show="user.pictureUrl" data-ng-src="{{ user.pictureUrl }}" class="fa fa-fw" />Me
+                    </a>
+                </li>
+                <li ng-if="isAuthenticated()" ng-class="{ active: path == '/logout' }">
+                    <a ng-click="logout()">
+                        <i class="fa fa-sign-out fa-fw"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main content -->
+        <main ng-view>
+            <!-- May the void be with you -->
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <small>
+                <ul>
+                    <li>
+                        <a href="https://github.com/alinua"><i class="fa fa-github fa-fw fa-3x"></i></a>
+                    </li>
+                    <li>
+                        <a href="https://fontawesome.io"><i class="fa fa-font-awesome fa-fw fa-3x"></i></a>
+                    </li>
+                </ul>
+
+                Alinua 2017
+            </small>
+        </footer>
+    </body>
+</html>

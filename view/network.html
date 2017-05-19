@@ -1,0 +1,57 @@
+<section class="center" ng-show="loading">
+    <aside>
+        <span>
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>Loading...
+        </span>
+    </aside>
+</section>
+
+<section>
+    <aside>
+        <div class="filters" ng-hide="loading">
+            <span>
+                <label><i class="fa fa-sort fa-fw"></i>Sort</label>
+                <select ng-model='order'>
+                    <option value="lastName">last name</option>
+                    <option value="firstName">first name</option>
+                </select>
+            </span>
+
+            <span>
+                <label><i class="fa fa-sort-amount-asc fa-fw"></i>Order</label>
+                <select ng-model='reverse'>
+                    <option ng-value="true">ascending</option>
+                    <option ng-value="false">descending</option>
+                </select>
+            </span>
+
+            <span>
+                <label><i class="fa fa-search fa-fw"></i>Search</label>
+                <input type="search" class="form-control" placeholder="Search..." ng-model="search" />
+            </span>
+        </div>
+    </aside>
+</section>
+
+<section class="listing cards">
+    <article ng-repeat="user in users | orderBy:order:reverse | filter:search as results">
+        <aside>
+            <i ng-hide="user.pictureUrl" class="fa fa-address-card fa-4x fa-fw"></i>
+            <img ng-show="user.pictureUrl" data-ng-src="{{ user.pictureUrl }}" />
+        </aside>
+
+        <aside>
+            <header>
+                <h1>
+                    <a href="#!/network/user/{{ user.id }}">
+                        {{ user.firstName }} {{ user.lastName | uppercase }}
+                    </a>
+                </h1>
+
+                <h2 ng-show="user.headline">
+                    {{ user.headline }}
+                </h2>
+            </header>
+        </aside>
+    </article>
+</section>

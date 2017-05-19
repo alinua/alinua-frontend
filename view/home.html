@@ -1,0 +1,50 @@
+<section class="no-grid center banner" ng-if="!isAuthenticated()">
+    <header>
+        <h1>How to start ?</h1>
+    </header>
+
+    <aside>
+        <p>Login with a LinkedIn account and start to use AlinUA platform !</p>
+
+        <br />
+
+        <button class="login" ng-click="authenticate()">
+            <i class="fa fa-linkedin fa-lw"></i>Sign in with LinkedIn
+        </button>
+    </aside>
+</section>
+
+<section class="no-grid center banner" ng-if="isAuthenticated()">
+    <header>
+        <h1>Welcome {{ user.firstName + ' ' + user.lastName }}</h1>
+    </header>
+</section>
+
+<section class="no-grid">
+    <header>
+        <h1>How it's work ?</h1>
+    </header>
+
+    <aside class="grid">
+        <ul>
+            <li>
+                <p>
+                    <i class="fa fa-users fa-5x fa-fw"></i><br />
+                    <b>A student platform for students</b>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <i class="fa fa-newspaper-o fa-5x fa-fw"></i><br />
+                    <b>Find your dreamed job</b>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <i class="fa fa-address-book fa-5x fa-fw"></i><br />
+                    <b>Create and improve your profile easily</b>
+                </p>
+            </li>
+        </ul>
+    </aside>
+</section>

@@ -1,0 +1,64 @@
+<section class="center" ng-show="loading">
+    <aside>
+        <span>
+            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>Loading...
+        </span>
+    </aside>
+</section>
+
+<section class="card">
+    <aside>
+        <i class="fa fa-briefcase fa-5x fa-fw"></i>
+    </aside>
+
+    <header>
+        <h1>{{ job.title }}</h1>
+    </header>
+
+    <article>
+        <header>
+            <h1>Informations</h1>
+        </header>
+
+        <ul>
+            <li ng-show="job.location">
+                <i class="fa fa-map-marker fa-fw"></i>
+                {{ job.location }}
+            </li>
+            <li ng-show="job.published">
+                <i class="fa fa-calendar fa-fw"></i>
+                {{ job.published }}
+            </li>
+        </ul>
+    </article>
+
+    <article ng-show="job.description">
+        <header>
+            <h1>Description</h1>
+        </header>
+
+        <p>{{ job.lead + " " }}{{ job.description }}</p>
+    </article>
+</section>
+
+<!-- Sidebar -->
+<nav>
+    <section>
+        <aside>
+            <header>
+                <h1><i class="fa fa-user-circle fa-fw"></i>&nbsp;Actions</h1>
+            </header>
+
+            <ul>
+                <li>
+                <i class="fa fa-edit fa-fw"></i>&nbsp;
+                <a href="#!/jobs/edit/{{ job.id }}">Edit job</a>
+                </li>
+            </ul>
+        </aside>
+    </section>
+
+    <section ng-controller="SidebarController" ng-include="'view/sidebar.html'">
+        <!-- On an other side, there is a bar -->
+    </section>
+</nav>
