@@ -9,10 +9,12 @@
 
         <h2>{{ user.headline }}</h2>
 
-        <h3 ng-show="user.emailAddress">
-            <a href="mailto:{{ user.emailAddress }}">
-                <i class="fa fa-envelope-o fa-fw"></i>
-                {{ user.emailAddress }}
+        <h3 ng-show="user.emailAddress || user.publicProfileUrl">
+            <a ng-show="user.emailAddress" href="mailto:{{ user.emailAddress }}">
+                <i class="fa fa-envelope-square fa-2x"></i>
+            </a>
+            <a ng-show="user.publicProfileUrl" href="{{ user.publicProfileUrl }}">
+                <i class="fa fa-linkedin-square fa-2x"></i>
             </a>
         </h3>
     </header>

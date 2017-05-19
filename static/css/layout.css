@@ -212,13 +212,14 @@ body > main > section.banner > aside > p {
 body > main > section > header {
     display: table;
 
-    margin: 0 8px 16px;
+    margin: 0 auto 16px;
 }
 
 body > main > section > header > h1 {
     padding: 4px;
 
     font-size: 30pt;
+    font-variant: small-caps;
 }
 
 body > main > section > header > h2,
@@ -348,6 +349,18 @@ body > main > section.listing > article > footer > ul > li {
 
 body > main > section.card > header > h1 {
     font-variant: small-caps;
+}
+
+body > main > section.card > header > h3 > a {
+    margin: 0 4px;
+
+    color: black;
+}
+
+body > main > section.card > header > h3 > a:hover {
+    color: rgb(173, 40, 40);
+
+    text-decoration: none;
 }
 
 body > main > section.card > aside {

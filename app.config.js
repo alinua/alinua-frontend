@@ -7,6 +7,7 @@
 angular
     .module('alinua', [
         'ngRoute',
+        'ngCookies',
         'satellizer',
         'home',
         'error',

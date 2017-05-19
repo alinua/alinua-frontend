@@ -1,7 +1,5 @@
 /* --------------------------------------------------------------------------
  *  Users manager
- *
- *  Controllers using to manage users (informations, listing, ...)
  * -------------------------------------------------------------------------- */
 
 // Modules
@@ -16,21 +14,31 @@ var server = "http://localhost:3000";
  *
  *  Notes
  *  -----
- *  Fetch data from /profile
+ *  This page need to be authenticated to access
  */
 app.controller('ProfileController',
-    function($scope, $window, $rootScope, $location, $auth) {
+    function($scope, $http, $location, $auth, $cookies) {
 
     // Check login status
     if(!$auth.isAuthenticated()) {
         $location.path('/');
     }
 
-    // Current page
-    $scope.path = "/profile";
+    // Get user id from cookie
+    var id = $cookies.get("alinua_user");
 
-    // Get user profile from localStorage
-    $scope.user = JSON.parse($window.localStorage.user);
+    // Request user informations from server
+    $http.get(server + "/users/user/" + id).then(
+        function(response) {
+            $scope.user = JSON.parse(response.data);
+        },
+        function(response) {
+            // Define HTTP status code from response
+            var id = (response.status == -1 ? "503" : response.status);
+
+            $location.path("/error/" + id);
+        }
+    );
 });
 
 /*  User controller
@@ -44,7 +52,7 @@ app.controller('ProfileController',
  *
  *  Notes
  *  -----
- *  Fetch data from /network/user/<id>
+ *  This page need to be authenticated to access
  */
 app.controller('UserController',
     function($scope, $http, $routeParams, $location, $auth) {
@@ -54,27 +62,15 @@ app.controller('UserController',
         $location.path('/');
     }
 
-    // Variables
-    $scope.loading = true;
-
     // Request user informations from server
     $http.get(server + "/users/user/" + $routeParams.id).then(
         function(response) {
-            console.debug("Received data from server with success");
-
-            // Parse fetch data
             $scope.user = JSON.parse(response.data);
-
-            // Terminate loading
-            $scope.loading = false;
         },
         function(response) {
-            console.error("Cannot fetch data from server");
-
             // Define HTTP status code from response
             var id = (response.status == -1 ? "503" : response.status);
 
-            // Redirect to /error/<id>
             $location.path("/error/" + id);
         }
     );
@@ -86,10 +82,10 @@ app.controller('UserController',
  *
  *  Notes
  *  -----
- *  Fetch data from /network
+ *  This page need to be authenticated to access
  */
 app.controller('UsersController',
-    function($scope, $http, $routeParams, $location, $auth) {
+    function($scope, $http, $location, $auth) {
 
     // Check login status
     if(!$auth.isAuthenticated()) {
@@ -97,31 +93,18 @@ app.controller('UsersController',
     }
 
     // Variables
-    $scope.loading = true;
     $scope.reverse = false;
     $scope.order = "lastName";
-
-    // Current page
-    $scope.path = "/network";
 
     // Request users list from server
     $http.get(server + "/users").then(
         function(response) {
-            console.debug("Received data from server with success");
-
-            // Parse fetch data
             $scope.users = response.data;
-
-            // Terminate loading
-            $scope.loading = false;
         },
         function(response) {
-            console.error("Cannot fetch data from server");
-
             // Define HTTP status code from response
             var id = (response.status == -1 ? "503" : response.status);
 
-            // Redirect to /error/<id>
             $location.path("/error/" + id);
         }
     );

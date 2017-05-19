@@ -30,8 +30,9 @@
         <!-- Javascripts -->
         <script src="static/js/jquery.min.js"></script>
         <script src="static/js/angular.min.js"></script>
-        <script src="static/js/angular-route.js"></script>
-        <script src="static/js/angular-resource.js"></script>
+        <script src="static/js/angular-route.min.js"></script>
+        <script src="static/js/angular-cookies.min.js"></script>
+        <script src="static/js/angular-resource.min.js"></script>
         <script src="static/js/satellizer.min.js"></script>
 
         <script src="app.config.js"></script>
@@ -56,26 +57,26 @@
         </header>
 
         <!-- Navigation links -->
-        <nav ng-controller="HomeController">
+        <nav ng-controller="NavController">
             <ul>
-                <li ng-class="{ active: path == '/' }">
+                <li>
                     <a href="#!/">
                         <i class="fa fa-home fa-fw"></i>Home
                     </a>
                 </li>
 
-                <li ng-if="isAuthenticated()" ng-class="{ active: path == '/network' }">
+                <li ng-if="isAuthenticated()">
                     <a href="#!/network">
                         <i class="fa fa-address-book fa-fw"></i>Network
                     </a>
                 </li>
-                <li ng-if="isAuthenticated()" ng-class="{ active: path == '/profile' }">
+                <li ng-if="isAuthenticated()">
                     <a href="#!/profile">
-                        <i ng-hide="user.pictureUrl" class="fa fa-address-card fa-fw"></i>
-                        <img ng-show="user.pictureUrl" data-ng-src="{{ user.pictureUrl }}" class="fa fa-fw" />Me
+                        <i ng-hide="avatar" class="fa fa-address-card fa-fw"></i>
+                        <img ng-show="avatar" data-ng-src="{{ avatar }}" class="fa fa-fw" />Me
                     </a>
                 </li>
-                <li ng-if="isAuthenticated()" ng-class="{ active: path == '/logout' }">
+                <li ng-if="isAuthenticated()">
                     <a ng-click="logout()">
                         <i class="fa fa-sign-out fa-fw"></i>
                     </a>

@@ -16,7 +16,7 @@
 
 <section class="no-grid center banner" ng-if="isAuthenticated()">
     <header>
-        <h1>Welcome {{ user.firstName + ' ' + user.lastName }}</h1>
+        <h1>Welcome {{ user.firstName }} {{ user.lastName | uppercase }}</h1>
     </header>
 </section>
 
