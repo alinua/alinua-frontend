@@ -1,0 +1,64 @@
+<section class="listing">
+    <article>
+        <header>
+            <h1>Registered jobs</h1>
+        </header>
+
+        <aside class="grid">
+            <div class="header">
+                <span class="full">
+                    Title
+                </span>
+                <span class="center">
+                </span>
+                <span class="center">
+                    Author
+                </span>
+                <span class="center">
+                    Published
+                </span>
+                <span class="center">
+                    Status
+                </span>
+            </div>
+
+            <div ng-repeat="job in jobs | orderBy:published:true">
+                <span>
+                    <a ng-click="show(job)">
+                        {{ job.title }}
+                    </a>
+                </span>
+                <span class="center">
+                    <a href="../#!/jobs/job/{{ job.id }}">
+                        <i class="fa fa-eye fa-fw"></i></a>
+                    <a ng-click="onChangeStatus(job.id, true)">
+                        <i class="fa fa-check fa-fw"></i></a>
+                    <a ng-click="onChangeStatus(job.id, false)">
+                        <i class="fa fa-remove fa-fw"></i></a>
+                </span>
+                <span class="center">
+                    {{ job.user.profile.firstName }} {{ job.user.profile.lastName | uppercase }}
+                </span>
+                <span class="center">
+                    {{ job.date }}
+                </span>
+                <span ng-if="job.status" class="allow">
+                    <i class="fa fa-check-circle fa-fw"></i>Allow
+                </span>
+                <span ng-if="!job.status" class="disallow">
+                    <i class="fa fa-times-circle fa-fw"></i>Disallow
+                </span>
+            </div>
+        </aside>
+    </article>
+
+    <article ng-if="show_data">
+        <header>
+            <h1>{{ data.title }}</h1>
+        </header>
+
+        <p>
+            {{ data.description.content }}
+        </p>
+    </article>
+</section>

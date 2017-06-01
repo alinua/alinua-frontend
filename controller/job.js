@@ -21,40 +21,39 @@ var server = "http://localhost:3000";
  *
  *  Notes
  *  -----
- *  Fetch data from /jobs/job/<id>
+ *  This page need to be authenticated to access
  */
 app.controller('JobController',
-    function($scope, $http, $routeParams, $auth) {
-
-    // Variables
-    $scope.loading = true;
+    function($scope, $http, $routeParams, $location, $auth, $cookies) {
 
     // Check authentification
     if(!$auth.isAuthenticated()) {
-        $location.path("/error/403");
+        $location.path('/error/401');
     }
+
+    // Get user id from cookie
+    var id = $cookies.get("alinua_user");
 
     // Request job informations from server
     $http.get(server + "/jobs/job/" + $routeParams.id).then(
         function(response) {
-            console.debug("Received data from server with success");
+            $scope.job = response.data;
 
-            // Parse fetch data
-            $scope.job = JSON.parse(response.data);
-
-            // Terminate loading
-            $scope.loading = false;
+            $scope.owner = false;
+            if(response.data.user.id === id)
+                $scope.owner = true;
         },
         function(response) {
-            console.error("Cannot fetch data from server");
-
             // Define HTTP status code from response
             var id = (response.status == -1 ? "503" : response.status);
 
-            // Redirect to /error/<id>
             $location.path("/error/" + id);
         }
     );
+
+    // User click on postulate button
+    $scope.onPostulate = function() {
+    };
 });
 
 /*  Jobs controller
@@ -63,39 +62,34 @@ app.controller('JobController',
  *
  *  Notes
  *  -----
- *  Fetch data from /jobs
+ *  This page need to be authenticated to access
  */
 app.controller('JobsController',
-    function($scope, $http, $routeParams, $location, $auth) {
+    function($scope, $http, $location, $auth) {
 
     // Variables
-    $scope.loading = true;
     $scope.reverse = true;
-    $scope.order = "published";
+    $scope.order = "date";
 
     // Check authentification
     if(!$auth.isAuthenticated()) {
-        $location.path("/error/403");
+        $location.path('/error/401');
     }
 
     // Request jobs list from server
     $http.get(server + "/jobs").then(
         function(response) {
-            console.debug("Received data from server with success");
+            $scope.jobs = [];
 
-            // Parse fetch data
-            $scope.jobs = JSON.parse(response.data);
-
-            // Terminate loading
-            $scope.loading = false;
+            for(job in response.data) {
+                if(response.data[job].status)
+                    $scope.jobs.push(response.data[job]);
+            }
         },
         function(response) {
-            console.error("Cannot fetch data from server");
-
             // Define HTTP status code from response
             var id = (response.status == -1 ? "503" : response.status);
 
-            // Redirect to /error/<id>
             $location.path("/error/" + id);
         }
     );

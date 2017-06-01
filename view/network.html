@@ -18,7 +18,7 @@
             </span>
 
             <span>
-                <label><i class="fa fa-search fa-fw"></i>Search</label>
+                <label><i class="fa fa-search fa-fw"></i></label>
                 <input type="search" class="form-control" placeholder="Search..." ng-model="search" />
             </span>
         </div>
@@ -28,20 +28,20 @@
 <section class="listing cards">
     <article ng-repeat="user in users | orderBy:order:reverse | filter:search as results">
         <aside>
-            <i ng-hide="user.pictureUrl" class="fa fa-address-card fa-4x fa-fw"></i>
-            <img ng-show="user.pictureUrl" data-ng-src="{{ user.pictureUrl }}" />
+            <i ng-hide="user.profile.pictureUrl" class="fa fa-address-card fa-4x fa-fw"></i>
+            <img ng-show="user.profile.pictureUrl" data-ng-src="{{ user.profile.pictureUrl }}" />
         </aside>
 
         <aside>
             <header>
                 <h1>
-                    <a href="#!/network/user/{{ user.id }}">
-                        {{ user.firstName }} {{ user.lastName | uppercase }}
+                    <a href="#!/network/user/{{ user.profile.id }}">
+                        {{ user.profile.firstName }} {{ user.profile.lastName | uppercase }}
                     </a>
                 </h1>
 
-                <h2 ng-show="user.headline">
-                    {{ user.headline }}
+                <h2 ng-show="user.profile.headline">
+                    {{ user.profile.headline }}
                 </h2>
             </header>
         </aside>

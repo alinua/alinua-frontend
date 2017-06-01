@@ -1,0 +1,23 @@
+
+body {
+    background-color: #282828;
+}
+
+body > nav {
+    background-color: #282828;
+    border-color: white !important;
+}
+
+body > header *, body > nav * {
+    color: white !important;
+    border-color: #585858 !important;
+}
+
+body > main > section > article {
+    color: white;
+    background-color: #181818;
+}
+
+body > main > section.listing > article {
+    border-bottom-color: white !important;
+}

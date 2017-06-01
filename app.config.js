@@ -13,6 +13,7 @@ angular
         'error',
         'job',
         'user',
+        'inbox',
         'admin-job',
         'admin-user',
     ])
@@ -36,12 +37,10 @@ angular
 
                 var deferred = $q.defer();
 
-                if ($auth.isAuthenticated()) {
+                if ($auth.isAuthenticated())
                     deferred.reject();
-                }
-                else {
+                else
                     deferred.resolve();
-                }
 
                 return deferred.promise;
             }];
@@ -51,12 +50,10 @@ angular
 
                 var deferred = $q.defer();
 
-                if ($auth.isAuthenticated()) {
+                if ($auth.isAuthenticated())
                     deferred.resolve();
-                }
-                else {
+                else
                     $location.path('/');
-                }
 
                 return deferred.promise;
             }];
@@ -85,15 +82,16 @@ angular
                     templateUrl: 'view/home.html',
                     controller: 'HomeController',
                 })
-                .when('/logout', {
-                    controller: 'LogoutController',
+                .when('/profile', {
+                    templateUrl: 'view/user.html',
+                    controller: 'ProfileController',
                     resolve: {
                         loginRequired: loginRequired
                     }
                 })
-                .when('/profile', {
-                    templateUrl: 'view/user.html',
-                    controller: 'ProfileController',
+                .when('/inbox', {
+                    templateUrl: 'view/inbox.html',
+                    controller: 'InboxController',
                     resolve: {
                         loginRequired: loginRequired
                     }

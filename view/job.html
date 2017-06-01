@@ -1,64 +1,84 @@
-<section class="center" ng-show="loading">
-    <aside>
-        <span>
-            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>Loading...
-        </span>
-    </aside>
-</section>
-
 <section class="card">
-    <aside>
-        <i class="fa fa-briefcase fa-5x fa-fw"></i>
-    </aside>
-
     <header>
         <h1>{{ job.title }}</h1>
+
+        <h2>
+            <ul>
+                <li ng-show="job.location">
+                    <i class="fa fa-map-marker fa-fw"></i>
+                    {{ job.location.name }}
+                    <span ng-show="job.location.country">
+                        ({{ job.location.country }})
+                    </span>
+                </li>
+                <li ng-show="job.description.type.contract">
+                    <i class="fa fa-file-text fa-fw"></i>
+                    {{ job.description.type.contract }}
+                </li>
+                <li ng-show="job.description.type.experience">
+                    <i class="fa fa-mortar-board fa-fw"></i>
+                    {{ job.description.type.experience }}
+                </li>
+                <li ng-show="job.description.type.salary">
+                    <i class="fa fa-euro fa-fw"></i>
+                    {{ job.description.type.salary }}
+                </li>
+            </ul>
+        </h2>
+
+        <h3>
+            <ul class="tags">
+                <li ng-repeat="tag in job.tags">
+                    {{ tag }}
+                </li>
+            </ul>
+        </h3>
     </header>
 
-    <article>
-        <header>
-            <h1>Informations</h1>
-        </header>
-
+    <nav class="job-nav">
         <ul>
-            <li ng-show="job.location">
-                <i class="fa fa-map-marker fa-fw"></i>
-                {{ job.location }}
+            <li ng-if="!owner">
+                <a ng-click="onPostulate()">
+                    <i class="fa fa-heart-o fa-fw"></i>
+                </a>
             </li>
-            <li ng-show="job.published">
-                <i class="fa fa-calendar fa-fw"></i>
-                {{ job.published }}
+            <li ng-if="owner">
+                <a href="">
+                    <i class="fa fa-edit fa-fw"></i>
+                    Edit
+                </a>
+            </li>
+            <li ng-if="owner">
+                <a href="">
+                    <i class="fa fa-remove fa-fw"></i>
+                    Remove
+                </a>
             </li>
         </ul>
-    </article>
+    </nav>
 
-    <article ng-show="job.description">
+    <article ng-show="job.description.lead || job.description.content">
         <header>
             <h1>Description</h1>
         </header>
 
-        <p>{{ job.lead + " " }}{{ job.description }}</p>
+        <p>{{ job.description.lead + " " }}{{ job.description.content }}</p>
+    </article>
+
+    <article ng-show="job.description.responsabilities">
+        <header>
+            <h1>Responsabilities</h1>
+        </header>
+
+        <ul ng-repeat="responsability in job.description.responsabilities">
+            <li>{{ responsability }}</li>
+        </ul>
+    </article>
+
+    <article ng-show="job.link">
+        <i class="fa fa-globe fa-fw"></i>
+        <a href="{{ job.link }}">
+            {{ job.link }}
+        </a>
     </article>
 </section>
-
-<!-- Sidebar -->
-<nav>
-    <section>
-        <aside>
-            <header>
-                <h1><i class="fa fa-user-circle fa-fw"></i>&nbsp;Actions</h1>
-            </header>
-
-            <ul>
-                <li>
-                <i class="fa fa-edit fa-fw"></i>&nbsp;
-                <a href="#!/jobs/edit/{{ job.id }}">Edit job</a>
-                </li>
-            </ul>
-        </aside>
-    </section>
-
-    <section ng-controller="SidebarController" ng-include="'view/sidebar.html'">
-        <!-- On an other side, there is a bar -->
-    </section>
-</nav>

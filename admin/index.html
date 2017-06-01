@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>AlinUA - Administration</title>
+
+        <!-- Normalize encoding -->
+        <meta charset="utf-8" />
+
+        <!-- Website data -->
+        <meta name="description"
+            content="AlinUA is a students social network project" />
+        <meta name="keywords"
+            content="alinua,social,students,university,java,jee,javascript" />
+        <meta name="author"
+            content="AlinUA Team" />
+
+        <!-- Website behavior -->
+        <meta name="viewport"
+            content="width=device-width, initial-scale=1.0" />
+
+        <!-- Website icon -->
+        <link rel="shortcut icon" href="../static/img/favicon.ico" />
+
+        <!-- Website appearance -->
+        <link rel="stylesheet" href="../static/css/reset.css" />
+        <link rel="stylesheet" href="../static/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="../static/css/layout.css" />
+        <!-- <link rel="stylesheet" href="../static/css/admin.css" /> -->
+
+        <!-- Javascripts -->
+        <script src="../static/js/jquery.min.js"></script>
+        <script src="../static/js/angular.min.js"></script>
+        <script src="../static/js/angular-route.min.js"></script>
+        <script src="../static/js/angular-cookies.min.js"></script>
+        <script src="../static/js/angular-resource.min.js"></script>
+
+        <script src="app.config.js"></script>
+
+        <script src="controller/main.js"></script>
+        <script src="controller/jobs.js"></script>
+        <script src="controller/users.js"></script>
+        <script src="controller/error.js"></script>
+    </head>
+
+    <body ng-app="adminua">
+        <!-- Header -->
+        <header>
+            <h1>
+                <a href="#!/">
+                    <i class="fa fa-paper-plane fa-fw"></i>AlinUA
+                </a>
+            </h1>
+        </header>
+
+        <!-- Navigation links -->
+        <nav>
+            <ul>
+                <li>
+                    <a href="#!/">
+                        <i class="fa fa-cogs fa-lw"></i>Administration
+                    </a>
+                </li>
+                <li>
+                    <a href="#!/users">
+                        <i class="fa fa-address-book fa-lw"></i>Users
+                    </a>
+                </li>
+                <li>
+                    <a href="#!/jobs">
+                        <i class="fa fa-newspaper-o fa-lw"></i>Jobs
+                    </a>
+                </li>
+                <li>
+                    <a href="..">
+                        <i class="fa fa-globe fa-lw"></i>Website
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main content -->
+        <main ng-view>
+            <!-- May the void be with you -->
+        </main>
+    </body>
+</html>
+

@@ -21,7 +21,7 @@ app.controller('ProfileController',
 
     // Check login status
     if(!$auth.isAuthenticated()) {
-        $location.path('/');
+        $location.path('/error/401');
     }
 
     // Get user id from cookie
@@ -59,13 +59,19 @@ app.controller('UserController',
 
     // Check login status
     if(!$auth.isAuthenticated()) {
-        $location.path('/');
+        $location.path('/error/401');
     }
 
     // Request user informations from server
     $http.get(server + "/users/user/" + $routeParams.id).then(
         function(response) {
-            $scope.user = JSON.parse(response.data);
+            var user = JSON.parse(response.data);
+
+            if(user.status)
+                $scope.user = user;
+
+            else
+                $location.path("/error/403");
         },
         function(response) {
             // Define HTTP status code from response
@@ -78,7 +84,7 @@ app.controller('UserController',
 
 /*  Users controller
  *
- *  Load users list sorted by register date
+ *  Load users list sorted by last name
  *
  *  Notes
  *  -----
@@ -89,7 +95,7 @@ app.controller('UsersController',
 
     // Check login status
     if(!$auth.isAuthenticated()) {
-        $location.path('/');
+        $location.path('/error/401');
     }
 
     // Variables
@@ -99,7 +105,12 @@ app.controller('UsersController',
     // Request users list from server
     $http.get(server + "/users").then(
         function(response) {
-            $scope.users = response.data;
+            $scope.users = [];
+
+            for(user in response.data) {
+                if(response.data[user].status)
+                    $scope.users.push(response.data[user]);
+            }
         },
         function(response) {
             // Define HTTP status code from response

@@ -36,10 +36,11 @@ app.controller('HomeController',
             $cookies.put("alinua_user", json_data.profile.id);
 
             // Store user avatar in localStorage
-            $window.localStorage.avatar = json_data.profile.pictureUrl;
+            if(!json_data.profile.pictureUrl == undefined)
+                $window.localStorage.avatar = json_data.profile.pictureUrl;
         })
         .catch(function(response) {
-            console.error("Cannot connect session: " + response.data);
+            console.error("Cannot connect session: " + response);
         });
     };
 

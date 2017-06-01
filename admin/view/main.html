@@ -1,0 +1,77 @@
+<section class="listing">
+    <article ng-show="users">
+        <header>
+            <h1>Latest users</h1>
+        </header>
+
+        <aside class="grid">
+            <div class="header">
+                <span class="full">
+                    Name
+                </span>
+                <span class="center">
+                    Register
+                </span>
+                <span class="center">
+                    Status
+                </span>
+            </div>
+
+            <div ng-repeat="user in users | orderBy:register:true | limitTo:5">
+                <span>
+                    {{ user.profile.firstName }} {{ user.profile.lastName | uppercase }}
+                </span>
+                <span class="center">
+                    {{ user.register }}
+                </span>
+                <span ng-if="user.status" class="allow">
+                    <i class="fa fa-check-circle fa-fw"></i>Allow
+                </span>
+                <span ng-if="!user.status" class="disallow">
+                    <i class="fa fa-times-circle fa-fw"></i>Disallow
+                </span>
+            </div>
+        </aside>
+    </article>
+
+    <article>
+        <header>
+            <h1>Latest jobs</h1>
+        </header>
+
+        <aside class="grid">
+            <div class="header">
+                <span class="full">
+                    Title
+                </span>
+                <span class="center">
+                    Author
+                </span>
+                <span class="center">
+                    Published
+                </span>
+                <span class="center">
+                    Status
+                </span>
+            </div>
+
+            <div ng-repeat="job in jobs | orderBy:published:true | limitTo:5">
+                <span>
+                    {{ job.title }}
+                </span>
+                <span class="center">
+                    {{ job.user.profile.firstName }} {{ job.user.profile.lastName | uppercase }}
+                </span>
+                <span class="center">
+                    {{ job.date }}
+                </span>
+                <span ng-if="job.status" class="allow">
+                    <i class="fa fa-check-circle fa-fw"></i>Allow
+                </span>
+                <span ng-if="!job.status" class="disallow">
+                    <i class="fa fa-times-circle fa-fw"></i>Disallow
+                </span>
+            </div>
+        </aside>
+    </article>
+</section>

@@ -1,81 +1,52 @@
-<section class="center" ng-show="loading">
+<section>
     <aside>
-        <span>
-            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>Loading...
-        </span>
+        <div class="filters" ng-hide="loading">
+            <span>
+                <label><i class="fa fa-sort fa-fw"></i>Sort</label>
+                <select ng-model='order'>
+                    <option value="date">date</option>
+                    <option value="title">title</option>
+                </select>
+            </span>
+
+            <span>
+                <label><i class="fa fa-sort-amount-asc fa-fw"></i>Order</label>
+                <select ng-model='reverse'>
+                    <option ng-value="true">ascending</option>
+                    <option ng-value="false">descending</option>
+                </select>
+            </span>
+
+            <span>
+                <label><i class="fa fa-search fa-fw"></i></label>
+                <input type="search" class="form-control" placeholder="Search..." ng-model="search" />
+            </span>
+        </div>
     </aside>
 </section>
 
 <section class="listing">
-    <header>
-        <h2>{{ results.length }} result(s)</h2>
-    </header>
-
-    <article ng-repeat="job in jobs | orderBy:order:reverse | filter:search as results">
+    <article ng-repeat="job in jobs | orderBy:order:reverse | filter:search">
         <header>
-            <h1 class="important">
-                <i class="fa fa-exclamation fa-lw"></i>
+            <h1>
                 <a href="#!/jobs/job/{{ job.id }}">{{ job.title }}</a>
             </h1>
-
-            <h2 ng-show="job.location">
-                <i class="fa fa-map-marker fa-lw"></i>
-                {{ job.location }}
-            </h2>
         </header>
 
-        <aside>
-            <p ng-switch="job.lead.length">
-                <span ng-switch-when="0">{{ job.description | limitTo:255 }}</span>
-                <span ng-switch-default>{{ job.lead }}</span>
+        <aside ng-show="job.description.content">
+            <p>
+                {{ job.description.content | limitTo:255 }}
+                <span ng-if="job.description.content.length > 255">...</span>
             </p>
         </aside>
 
-        <footer>
+        <footer ng-show="job.location">
             <ul>
-                <li ng-show="job.published">
-                    <i class="fa fa-calendar fa-lw"></i>
-                    {{ job.published }}
+                <li>
+                    <i class="fa fa-map-marker fa-mw"></i>
+                    {{ job.location.name }}
                 </li>
             </ul>
         </footer>
     </article>
 </section>
-
-<!-- Sidebar -->
-<nav>
-    <section>
-        <aside>
-            <header>
-                <h1><i class="fa fa-filter fa-fw"></i>&nbsp;Filters</h1>
-            </header>
-
-            <div class="filters" ng-hide="loading">
-                <span>
-                    <label><i class="fa fa-sort fa-fw"></i>Sort</label>
-                    <select ng-model='order'>
-                        <option value="published">published</option>
-                        <option value="title">title</option>
-                    </select>
-                </span>
-
-                <span>
-                    <label><i class="fa fa-sort-amount-asc fa-fw"></i>Order</label>
-                    <select ng-model='reverse'>
-                        <option ng-value="true">ascending</option>
-                        <option ng-value="false">descending</option>
-                    </select>
-                </span>
-
-                <span>
-                    <label><i class="fa fa-search fa-fw"></i>Search</label>
-                    <input type="search" class="form-control" placeholder="Search..." ng-model="search" />
-                </span>
-            </div>
-        </aside>
-    </section>
-
-    <section ng-controller="SidebarController" ng-include="'view/sidebar.html'">
-        <!-- On an other side, there is a bar -->
-    </section>
-</nav>

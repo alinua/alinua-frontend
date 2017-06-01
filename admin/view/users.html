@@ -1,0 +1,59 @@
+<section class="listing">
+    <article ng-show="users">
+        <header>
+            <h1>Registered users</h1>
+        </header>
+
+        <aside class="grid">
+            <div class="header">
+                <span class="full">
+                    Name
+                </span>
+                <span class="center">
+                </span>
+                <span class="center">
+                    Register
+                </span>
+                <span class="center">
+                    Status
+                </span>
+            </div>
+
+            <div ng-repeat="user in users | orderBy:register:true">
+                <span>
+                    <a ng-click="show(user)">
+                        {{ user.profile.firstName }} {{ user.profile.lastName | uppercase }}
+                    </a>
+                </span>
+                <span class="center">
+                    <a href="../#!/network/user/{{ user.profile.id }}">
+                        <i class="fa fa-eye fa-fw"></i></a>
+                    <a ng-click="onChangeStatus(user.profile.id, true)">
+                        <i class="fa fa-check fa-fw"></i></a>
+                    <a ng-click="onChangeStatus(user.profile.id, false)">
+                        <i class="fa fa-remove fa-fw"></i></a>
+                </span>
+                <span class="center">
+                    {{ user.register }}
+                </span>
+                <span ng-if="user.status" class="allow">
+                    <i class="fa fa-check-circle fa-fw"></i>Allow
+                </span>
+                <span ng-if="!user.status" class="disallow">
+                    <i class="fa fa-times-circle fa-fw"></i>Disallow
+                </span>
+            </div>
+        </aside>
+    </article>
+
+    <article ng-if="show_data">
+        <header>
+            <h1>{{ data.profile.firstName }} {{ data.profile.lastName | uppercase }}</h1>
+            <h2>{{ data.profile.headline }}</h2>
+        </header>
+
+        <p ng-show="data.profile.summary">
+            {{ data.profile.summary }}
+        </p>
+    </article>
+</section>

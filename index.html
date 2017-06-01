@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="fr">
+<html lang="en">
     <head>
         <title>Alinua</title>
 
@@ -40,6 +40,7 @@
         <script src="controller/home.js"></script>
         <script src="controller/job.js"></script>
         <script src="controller/user.js"></script>
+        <script src="controller/inbox.js"></script>
         <script src="controller/error.js"></script>
         <script src="controller/admin/user.js"></script>
         <script src="controller/admin/job.js"></script>
@@ -50,8 +51,7 @@
         <header>
             <h1>
                 <a href="#!/">
-                    <i class="fa fa-paper-plane fa-fw"></i>
-                    AlinUA
+                    <i class="fa fa-paper-plane fa-fw"></i>AlinUA
                 </a>
             </h1>
         </header>
@@ -61,26 +61,39 @@
             <ul>
                 <li>
                     <a href="#!/">
-                        <i class="fa fa-home fa-fw"></i>Home
+                        <i class="fa fa-home fa-lw"></i>Home
                     </a>
                 </li>
 
                 <li ng-if="isAuthenticated()">
+                    <a href="#!/jobs">
+                        <i class="fa fa-newspaper-o fa-lw"></i>Jobs
+                    </a>
+                </li>
+                <li ng-if="isAuthenticated()">
                     <a href="#!/network">
-                        <i class="fa fa-address-book fa-fw"></i>Network
+                        <i class="fa fa-address-book fa-lw"></i>Network
                     </a>
                 </li>
-                <li ng-if="isAuthenticated()">
-                    <a href="#!/profile">
-                        <i ng-hide="avatar" class="fa fa-address-card fa-fw"></i>
-                        <img ng-show="avatar" data-ng-src="{{ avatar }}" class="fa fa-fw" />Me
-                    </a>
-                </li>
-                <li ng-if="isAuthenticated()">
-                    <a ng-click="logout()">
-                        <i class="fa fa-sign-out fa-fw"></i>
-                    </a>
-                </li>
+                <ul ng-if="isAuthenticated()">
+                    <li>
+                        <a href="#!/profile">
+                            <i ng-if="avatar == undefined" class="fa fa-address-card fa-fw"></i>
+                            <img ng-if="!avatar == undefined" data-ng-src="{{ avatar }}" class="fa fa-fw" />
+                        </a>
+                    </li>
+                    <li ng-controller="HomeController">
+                        <a href="#!/inbox">
+                            <i ng-if="user.unread == 0 || user.unread == undefined" class="fa fa-envelope-o fa-fw"></i>
+                            <i ng-if="user.unread > 0" class="fa fa-envelope fa-lw"></i>{{ user.unread }}
+                        </a>
+                    </li>
+                    <li>
+                        <a ng-click="logout()">
+                            <i class="fa fa-sign-out fa-fw"></i>
+                        </a>
+                    </li>
+                </ul>
             </ul>
         </nav>
 

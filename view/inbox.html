@@ -1,0 +1,47 @@
+<section class="listing cards">
+    <header>
+        <h1><i class="fa fa-inbox fa-fw"></i>Inbox</h1>
+    </header>
+
+    <article ng-if="messages == undefined" class="center important">
+        No message
+    </article>
+
+    <article ng-if="messages.length > 0" class="grid">
+        <div class="header">
+            <span></span>
+            <span class="full">Title</span>
+            <span class="center">From</span>
+        </div>
+
+        <div ng-repeat="message in messages">
+            <span class="center">
+                <a ng-click="mark(message)">
+                    <i ng-if="message.status" class="fa fa-envelope-open-o fa-fw"></i>
+                    <i ng-if="!message.status" class="fa fa-envelope-o fa-fw"></i>
+                </a>
+            </span>
+            <span>
+                <span ng-if="message.type == 'job'"><i class="fa fa-briefcase fa-fw"></i></span>
+                <a ng-click="show(message)">
+                    {{ message.data.title }}
+                </a>
+            </span>
+            <span class="center">
+                <a href="#!/network/user/{{ message.user.profile.id }}">
+                    {{ message.user.profile.firstName }} {{ message.user.profile.lastName | uppercase }}
+                </a>
+            </span>
+        </div>
+    </article>
+
+    <article ng-if="show_message">
+        <header>
+            <h1>{{ message_data.data.title }}</h1>
+        </header>
+
+        <p>
+            {{ message_data.data.content }}
+        </p>
+    </article>
+</section>

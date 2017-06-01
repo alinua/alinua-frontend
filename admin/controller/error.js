@@ -25,10 +25,6 @@ app.controller('ErrorController',
 
     // Errors data structure
     var errors = {
-        "401": {
-            title: "401 Unauthorized",
-            message: "You cannot access to this page without authenticate.",
-        },
         "403": {
             title: "403 Forbidden",
             message: "The request was valid, but the server is refusing " +

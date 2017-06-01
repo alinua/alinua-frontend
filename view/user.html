@@ -1,64 +1,64 @@
 <section class="card">
     <aside>
-        <i ng-hide="user.pictureUrl" class="fa fa-address-card fa-5x fa-fw"></i>
-        <img ng-show="user.pictureUrl" data-ng-src="{{ user.pictureUrl }}" />
+        <i ng-hide="user.profile.pictureUrl" class="fa fa-address-card fa-5x fa-fw"></i>
+        <img ng-show="user.profile.pictureUrl" data-ng-src="{{ user.profile.pictureUrl }}" />
     </aside>
 
     <header>
-        <h1>{{ user.firstName }} {{ user.lastName | uppercase }}</h1>
+        <h1>{{ user.profile.firstName }} {{ user.profile.lastName | uppercase }}</h1>
 
-        <h2>{{ user.headline }}</h2>
+        <h2>{{ user.profile.headline }}</h2>
 
-        <h3 ng-show="user.emailAddress || user.publicProfileUrl">
-            <a ng-show="user.emailAddress" href="mailto:{{ user.emailAddress }}">
+        <h3 ng-show="user.profile.emailAddress || user.profile.publicProfileUrl">
+            <a ng-show="user.profile.emailAddress" href="mailto:{{ user.profile.emailAddress }}">
                 <i class="fa fa-envelope-square fa-2x"></i>
             </a>
-            <a ng-show="user.publicProfileUrl" href="{{ user.publicProfileUrl }}">
+            <a ng-show="user.profile.publicProfileUrl" href="{{ user.profile.publicProfileUrl }}">
                 <i class="fa fa-linkedin-square fa-2x"></i>
             </a>
         </h3>
     </header>
 
-    <article ng-show="user.location || user.industry">
+    <article ng-show="user.profile.location || user.profile.industry">
         <header>
             <h1>Informations</h1>
         </header>
 
-        <ul>
-            <li ng-show="user.location">
+        <ul class="no-dot">
+            <li ng-show="user.profile.location">
                 <i class="fa fa-map-marker fa-fw"></i>
-                {{ user.location.name }}
+                {{ user.profile.location.name }}
             </li>
 
-            <li ng-show="user.industry">
+            <li ng-show="user.profile.industry">
                 <i class="fa fa-industry fa-fw"></i>
-                {{ user.industry }}
+                {{ user.profile.industry }}
             </li>
         </ul>
     </article>
 
-    <article ng-show="user.summary">
+    <article ng-show="user.profile.summary">
         <header>
             <h1>Summary</h1>
         </header>
 
-        <p>{{ user.summary }}</p>
+        <p>{{ user.profile.summary }}</p>
     </article>
 
-    <article ng-show="user.specialties">
+    <article ng-show="user.profile.specialties">
         <header>
             <h1>Specialties</h1>
         </header>
 
-        <p>{{ user.specialties }}</p>
+        <p>{{ user.profile.specialties }}</p>
     </article>
 
-    <article ng-show="user.positions.values">
+    <article ng-show="user.profile.positions.values">
         <header>
             <h1>Positions</h1>
         </header>
 
-        <aside ng-repeat="position in user.positions.values" class="card-position {{ position.isCurrent }}">
+        <aside ng-repeat="position in user.profile.positions.values" class="card-position {{ position.isCurrent }}">
             <header>
                 <h1>{{ position.title }}</h1>
 

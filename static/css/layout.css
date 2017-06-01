@@ -1,11 +1,11 @@
-/* ---------------------------------------
+/* --------------------------------------------------------------------------
  *  Document
- * --------------------------------------- */
+ * -------------------------------------------------------------------------- */
 
 body {
     margin-top: 60px;
 
-    background-color: #E5E5E5;
+    background-color: #D9D9D9;
 
     background-image: url("../img/noise.png");
 
@@ -18,9 +18,9 @@ body {
     background-origin: padding-box;
 }
 
-/* ---------------------------------------
+/* --------------------------------------------------------------------------
  *  Header
- * --------------------------------------- */
+ * -------------------------------------------------------------------------- */
 
 body > header {
     position: fixed;
@@ -35,17 +35,12 @@ body > header > h1 {
     font-weight: 600;
 }
 
-body > header > h1 > a {
-    color: rgb(40, 130, 173);
-}
+body > header > h1 > a { color: rgb(40, 130, 173); }
+body > header > h1 > a > i { margin-right: 8px; }
 
-body > header > h1 > a > i {
-    margin-right: 8px;
-}
-
-/* ---------------------------------------
+/* --------------------------------------------------------------------------
  *  Navigation
- * --------------------------------------- */
+ * -------------------------------------------------------------------------- */
 
 body > nav {
     position: fixed;
@@ -69,37 +64,36 @@ body > nav > ul {
 }
 
 body > nav > ul > li,
-body > nav > ul > li > ul > li {
-    display: inline;
+body > nav > ul > ul > li {
+    display: inline-block;
 
     font-size: 14pt;
     font-variant: small-caps;
 }
 
+body > nav > ul > ul,
 body > nav > ul > li:nth-child(1n+2) {
     padding-left: 4px;
 
     border-left: 1px solid rgba(40, 130, 173, 0.2);
 }
 
-body > nav > ul > li > ul {
-    display: inline;
-}
+body > nav > ul > ul { display: inline; }
 
 body > nav > ul > li > a,
-body > nav > ul > li > ul > li > a {
+body > nav > ul > ul > li > a {
     padding: 8px;
 
     color: rgb(40, 130, 173);
 }
 
 body > nav > ul > li.active > a,
-body > nav > ul > li > ul > li.active > a {
+body > nav > ul > ul > li.active > a {
     color: rgb(173, 63, 40);
 }
 
 body > nav > ul > li > a:hover,
-body > nav > ul > li > ul > li > a:hover {
+body > nav > ul > ul > li > a:hover {
     color: white;
     background-color: rgb(40, 130, 173);
 
@@ -107,9 +101,7 @@ body > nav > ul > li > ul > li > a:hover {
 }
 
 body > nav > ul > li > a > i,
-body > nav > ul > li > a > img {
-    margin-right: 4px;
-}
+body > nav > ul > li > a > img { margin-right: 4px; }
 
 body > nav > ul > li > a > img {
     position: relative;
@@ -122,9 +114,9 @@ body > nav > ul > li > a > img {
     border-radius: 4px;
 }
 
-/* ---------------------------------------
+/* --------------------------------------------------------------------------
  *  Footer
- * --------------------------------------- */
+ * -------------------------------------------------------------------------- */
 
 body > footer {
     margin: 16px;
@@ -138,6 +130,7 @@ body > footer > small {
     color: grey;
 }
 
+/* Footer listing */
 body > footer > small > ul {
     margin-bottom: 8px;
 
@@ -146,21 +139,13 @@ body > footer > small > ul {
     list-style: none;
 }
 
-body > footer > small > ul > li {
-    display: inline-block;
-}
+body > footer > small > ul > li { display: inline-block; }
+body > footer > small > ul > li > a { color: grey; }
+body > footer > small > ul > li > a:hover { color: rgb(40, 130, 173); }
 
-body > footer > small > ul > li > a {
-    color: grey;
-}
-
-body > footer > small > ul > li > a:hover {
-    color: rgb(40, 130, 173);
-}
-
-/* ---------------------------------------
+/* --------------------------------------------------------------------------
  *  Main content
- * --------------------------------------- */
+ * -------------------------------------------------------------------------- */
 
 body > main {
     width: 100%;
@@ -201,13 +186,11 @@ body > main > section.banner > aside > p {
     text-shadow: black 0 0 4px;
 }
 
-body > main > section.banner > aside > p {
-    font-size: 14pt;
-}
+body > main > section.banner > aside > p { font-size: 14pt; }
 
-/* ---------------------------------------
+/* --------------------------------------------------------------------------
  *  Multiple content
- * --------------------------------------- */
+ * -------------------------------------------------------------------------- */
 
 body > main > section > header {
     display: table;
@@ -232,14 +215,10 @@ body > main > section > footer > h3 {
 }
 
 body > main > section > header > h2,
-body > main > section > footer > h2 {
-    font-size: 14pt;
-}
+body > main > section > footer > h2 { font-size: 14pt; }
 
 body > main > section > header > h3,
-body > main > section > footer > h3 {
-    font-size: 12pt;
-}
+body > main > section > footer > h3 { font-size: 12pt; }
 
 body > main > section > header,
 body > main > section > footer {
@@ -258,9 +237,9 @@ body > main > section > article {
     border-radius: 4px;
 }
 
-/* ---------------------------------------
+/* --------------------------------------------------------------------------
  *  Listing
- * --------------------------------------- */
+ * -------------------------------------------------------------------------- */
 
 body > main > section.listing > article {
     display: table;
@@ -319,6 +298,7 @@ body > main > section.listing > article > aside > header > h1 > a {
     color: rgb(173, 40, 40);
 }
 
+body > main > section.listing > article > p,
 body > main > section.listing > article > aside > p {
     margin: 8px auto;
 
@@ -343,12 +323,22 @@ body > main > section.listing > article > footer > ul > li {
     margin-right: 16px;
 }
 
-/* ---------------------------------------
+/* --------------------------------------------------------------------------
  *  Card
- * --------------------------------------- */
+ * -------------------------------------------------------------------------- */
 
 body > main > section.card > header > h1 {
     font-variant: small-caps;
+}
+
+body > main > section.card > header > h2 > ul {
+    list-style: none;
+}
+
+body > main > section.card > header > h2 > ul > li {
+    display: inline-block;
+
+    margin: 4px 8px;
 }
 
 body > main > section.card > header > h3 > a {
@@ -361,6 +351,27 @@ body > main > section.card > header > h3 > a:hover {
     color: rgb(173, 40, 40);
 
     text-decoration: none;
+}
+
+body > main > section.card > header > h3 > ul.tags {
+    margin: 16px;
+
+    list-style: none;
+}
+
+body > main > section.card > header > h3 > ul.tags > li {
+    display: inline-block;
+
+    margin: 4px;
+    padding: 6px 10px;
+
+    color: white;
+    background-color: rgba(40, 130, 173, 0.6);
+
+    border-radius: 6px;
+
+    font-size: 12pt;
+    font-weight: 500;
 }
 
 body > main > section.card > aside {
@@ -390,10 +401,6 @@ body > main > section.card > article > header {
 body > main > section.card > article > header > h1 {
     font-size: 16pt;
     font-weight: 500;
-}
-
-body > main > section.card > article > ul {
-    list-style: none;
 }
 
 body > main > section.card > article > ul > li {
@@ -464,9 +471,9 @@ body > main > section.card > article > aside.card-position > footer > ul > li {
     margin-right: 8px;
 }
 
-/* ---------------------------------------
+/* --------------------------------------------------------------------------
  *  Sidebar
- * --------------------------------------- */
+ * -------------------------------------------------------------------------- */
 
 body > main > nav > section > aside {
     margin-bottom: 32px;
@@ -536,9 +543,9 @@ body > main > nav > section > aside.sidelinks > ul > li > a:hover {
     color: rgb(40, 130, 173);
 }
 
-/* ---------------------------------------
+/* --------------------------------------------------------------------------
  *  Filters
- * --------------------------------------- */
+ * -------------------------------------------------------------------------- */
 
 body > main > section > aside > div.filters {
     display: table;
@@ -588,9 +595,53 @@ body > main > section > aside > div.filters > span > select {
     border-radius: 4px;
 }
 
-/* ---------------------------------------
+/* --------------------------------------------------------------------------
+ *  Job - Navigation buttons
+ * -------------------------------------------------------------------------- */
+
+.job-nav {
+    display: table;
+
+    width: 100%;
+}
+
+.job-nav > ul {
+    display: table-row;
+
+    list-style: none;
+}
+
+.job-nav > ul > li {
+    display: table-cell;
+
+    padding-right: 8px;
+    padding-bottom: 8px;
+}
+
+.job-nav > ul > li:last-child {
+    width: 100%;
+}
+
+.job-nav > ul > li > a {
+    padding: 8px 12px;
+
+    color: rgb(40, 130, 173);
+    background-color: white;
+
+    border-radius: 4px;
+    box-shadow: 0 0 2px rgba(80, 80, 80, 0.5);
+
+    white-space: nowrap;
+}
+
+.job-nav > ul > li > a:hover {
+    color: white;
+    background-color: rgb(40, 130, 173);
+}
+
+/* --------------------------------------------------------------------------
  *  Simple content
- * --------------------------------------- */
+ * -------------------------------------------------------------------------- */
 
 aside.note {
     margin: 96px 32px;
@@ -620,9 +671,9 @@ aside.note > div ul {
     margin-left: 16px;
 }
 
-/* ---------------------------------------
+/* --------------------------------------------------------------------------
  *  Misc
- * --------------------------------------- */
+ * -------------------------------------------------------------------------- */
 
 .fa-lw { width:1.28571429em; text-align: left; }
 
@@ -656,9 +707,7 @@ aside.note > div ul {
     cursor: pointer;
 }
 
-.login > i {
-    font-size: 20pt;
-}
+.login > i { font-size: 20pt; }
 
 .login:active {
     background-color: #006AB6;
@@ -666,9 +715,16 @@ aside.note > div ul {
     box-shadow: 0 2px 2px rgb(100, 100, 100);
 }
 
-/* ---------------------------------------
+.no-dot { list-style: none; }
+
+.full { width: 100% !important; }
+
+.allow { text-shadow: 0 1px 1px lightgrey; color: #a1b56c; }
+.disallow { text-shadow: 0 1px 1px lightgrey; color: #ab4642; }
+
+/* --------------------------------------------------------------------------
  *  Form
- * --------------------------------------- */
+ * -------------------------------------------------------------------------- */
 
 section > article > form {
     display: table;
@@ -729,33 +785,35 @@ section > article > form > input[type="submit"] {
     border: 1px solid grey;
 }
 
-/* ---------------------------------------
+/* --------------------------------------------------------------------------
  *  Grid
- * --------------------------------------- */
+ * -------------------------------------------------------------------------- */
 
-aside.grid {
+.grid {
     display: table;
 
-    width: 80%;
-
     margin: 0 auto;
-
-    border-spacing: 16px 0;
 }
 
-aside.grid > ul {
+.grid > div {
     display: table-row;
 }
 
-aside.grid > ul > li {
+.grid > div > span {
     display: table-cell;
 
-    width: 25%;
-
     vertical-align: middle;
+
+    white-space: nowrap;
+
+    padding: 4px 8px;
 }
 
-aside.grid > ul > li > p {
+.homogeneous > div > span {
+    width: 25%;
+}
+
+.grid > div > span > p {
     padding: 32px;
 
     background-color: white;
@@ -764,20 +822,25 @@ aside.grid > ul > li > p {
     text-align: center;
 }
 
-aside.grid > ul > li > p > i {
+.grid > div > span > p > i {
     margin-bottom: 16px;
 }
 
-/* ---------------------------------------
+.grid > div.header > span {
+    font-weight: 500;
+    font-variant: small-caps;
+}
+
+/* --------------------------------------------------------------------------
  *  Responsive design
- * --------------------------------------- */
+ * -------------------------------------------------------------------------- */
 
 @media screen and (max-width: 800px) {
     body > main,
     body > main > div,
-    aside.grid,
-    aside.grid > ul,
-    aside.grid > ul > li {
+    .grid,
+    .grid > div,
+    .grid > div > span {
         display: block;
 
         width: 100%;
