@@ -1,4 +1,8 @@
-<section class="card">
+<section ng-show="loading" class="center loading">
+    <i class="fa fa-fw fa-5x fa-spinner fa-pulse"></i>
+</section>
+
+<section ng-hide="loading" class="card">
     <header>
         <h1>{{ job.title }}</h1>
 
@@ -37,21 +41,15 @@
 
     <nav class="job-nav">
         <ul>
-            <li ng-if="!owner">
-                <a ng-click="onPostulate()">
-                    <i class="fa fa-heart-o fa-fw"></i>
-                </a>
-            </li>
             <li ng-if="owner">
                 <a href="">
-                    <i class="fa fa-edit fa-fw"></i>
-                    Edit
+                    <i class="fa fa-edit fa-lw"></i>Edit
                 </a>
             </li>
+
             <li ng-if="owner">
                 <a href="">
-                    <i class="fa fa-remove fa-fw"></i>
-                    Remove
+                    <i class="fa fa-remove fa-lw"></i>Remove
                 </a>
             </li>
         </ul>
@@ -73,12 +71,5 @@
         <ul ng-repeat="responsability in job.description.responsabilities">
             <li>{{ responsability }}</li>
         </ul>
-    </article>
-
-    <article ng-show="job.link">
-        <i class="fa fa-globe fa-fw"></i>
-        <a href="{{ job.link }}">
-            {{ job.link }}
-        </a>
     </article>
 </section>

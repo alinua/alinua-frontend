@@ -1,23 +1,186 @@
+/* --------------------------------------------------------------------------
+ *  Document
+ * -------------------------------------------------------------------------- */
 
 body {
-    background-color: #282828;
+    background-color: #DEDEDE;
+
+    background-image: url("../img/noise.png");
+
+    background-position: 0% 0%;
+    background-attachment: scroll;
+    background-repeat: repeat, repeat-x;
+
+    background-size: auto auto;
+    background-clip: border-box;
+    background-origin: padding-box;
 }
+
+body > nav,
+body > header,
+body > footer {
+    position: fixed;
+    left: 0;
+
+    padding: 8px;
+    width: 250px;
+
+    color: white;
+    background-color: #282828;
+    border-right: 2px solid black;
+}
+
+/* --------------------------------------------------------------------------
+ *  Header
+ * -------------------------------------------------------------------------- */
+
+body > header {
+    top: 0;
+    height: 64px;
+
+    text-align: center;
+}
+
+body > header > h1 > a > i {
+    margin-right: 6px;
+}
+
+/* --------------------------------------------------------------------------
+ *  Navigation
+ * -------------------------------------------------------------------------- */
 
 body > nav {
-    background-color: #282828;
-    border-color: white !important;
+    top: 64px;
+
+    height: 100%;
 }
 
-body > header *, body > nav * {
-    color: white !important;
-    border-color: #585858 !important;
+body > nav > ul {
+    list-style: none;
+}
+
+body > nav > ul > li > a {
+    display: block;
+    margin: 4px 0;
+    padding: 8px;
+}
+
+body > nav > ul > li > a:hover {
+    color: black;
+    background-color: white;
+
+    border-radius: 2px;
+}
+
+body > nav > ul > li > a > i {
+    margin-right: 8px;
+}
+
+body > header > h1,
+body > header > h1 > a,
+body > nav > ul > li,
+body > nav > ul > li > a {
+    color: white;
+}
+
+/* --------------------------------------------------------------------------
+ *  Main content
+ * -------------------------------------------------------------------------- */
+
+body > main {
+    margin-left: 250px;
+    padding: 16px;
 }
 
 body > main > section > article {
-    color: white;
-    background-color: #181818;
+    margin-bottom: 32px;
 }
 
-body > main > section.listing > article {
-    border-bottom-color: white !important;
+body > main > section > article > header {
+    margin-bottom: 8px;
+
+    border-bottom: 1px solid #181818;
+}
+
+body > main > section > article > header > h1 {
+    color: #181818;
+
+    font-size: 20pt;
+    font-variant: small-caps;
+}
+
+/* --------------------------------------------------------------------------
+ *  Grid
+ * -------------------------------------------------------------------------- */
+
+.grid {
+    display: table;
+
+    margin: 0 auto;
+
+    border-spacing: 8px;
+}
+
+.grid > div {
+    display: table-row;
+}
+
+.grid > div > span {
+    display: table-cell;
+    padding: 4px 8px;
+
+    white-space: nowrap;
+
+    vertical-align: middle;
+}
+
+.homogeneous > div > span {
+    width: 25%;
+    padding: 32px;
+
+    background-color: white;
+
+    text-align: center;
+
+    white-space: word-wrap;
+}
+
+.grid > div > span > i {
+    margin-right: 4px;
+}
+
+.grid > div > span > p > i {
+    margin-bottom: 16px;
+}
+
+.grid > div.header > span {
+    font-weight: 500;
+    font-variant: small-caps;
+}
+
+/* --------------------------------------------------------------------------
+ *  Misc
+ * -------------------------------------------------------------------------- */
+
+.fa-rm { margin-right: 6px; }
+.fa-lw { width:1.3em; margin-right: 4px; }
+
+.full { width: 100% !important; }
+.no-dot { list-style: none; }
+.center { text-align: center !important; }
+.important { color: rgb(173, 40, 40); }
+
+.allow { background-color: #a1b56c; border-radius: 2px; }
+.disallow { background-color: #ab4642; border-radius: 2px; }
+
+.loading > i { margin: 32px 0; color: rgba(0, 0, 0, 0.2); }
+
+/* --------------------------------------------------------------------------
+ *  Footer
+ * -------------------------------------------------------------------------- */
+
+body > footer {
+    bottom: 0;
+
+    text-align: center;
 }

@@ -1,5 +1,7 @@
 /* --------------------------------------------------------------------------
- *  Home page
+ *  Home page manager
+ *
+ *  Load website informations and widgets
  * -------------------------------------------------------------------------- */
 
 // Modules
@@ -8,12 +10,29 @@ var app = angular.module("home", []);
 // Server url
 var server = "http://localhost:3000";
 
-/*  Home controller
+/* --------------------------------------------------------------------------
+ *  Alinua controller
  *
- *  Manage authenticate with localStorage and cookies usage
- */
-app.controller('HomeController',
-    function($scope, $window, $http, $location, $auth, $cookies) {
+ *  Manage login to AlinUA
+ * -------------------------------------------------------------------------- */
+app.controller('AlinuaController',
+    function($auth, $cookies, $http, $interval, $location, $scope, $window) {
+
+    /* -----------------------------------
+     *  Variables
+     * ----------------------------------- */
+
+    // User informations
+    var user = {};
+    var unread = 0;
+    var message = {};
+
+    // Get cookie content
+    var identifier = $cookies.get("alinua_user");
+
+    /* -----------------------------------
+     *  Functions
+     * ----------------------------------- */
 
     // Check login status
     $scope.isAuthenticated = function() {
@@ -23,35 +42,87 @@ app.controller('HomeController',
     // Manage provider authentification
     $scope.authenticate = function() {
         $auth.link("linkedin").then(function(response) {
-            console.info("Successfully connected to LinkedIn");
+            var data = JSON.parse(response.data);
 
-            var json_data = JSON.parse(response.data);
-
-            $scope.user = json_data.profile;
+            // Store user informations in localStorage
+            $scope.user = data.user;
+            $scope.unread = data.unread;
+            $scope.messages = data.messages;
 
             // Set authenticate token
-            $auth.setToken(json_data.token);
+            $auth.setToken(data.token);
 
             // Stock id in cookie
-            $cookies.put("alinua_user", json_data.profile.id);
+            $cookies.put("alinua_user", data.user.profile.id);
 
-            // Store user avatar in localStorage
-            if(!json_data.profile.pictureUrl == undefined)
-                $window.localStorage.avatar = json_data.profile.pictureUrl;
+            // Redirect to home
+            $location.path("/");
         })
         .catch(function(response) {
-            console.error("Cannot connect session: " + response);
+            $location.path("/error/" + (
+                response.status == -1 ? "503" : response.status));
         });
     };
 
-    // Get informations from user if authenticated
-    if($auth.isAuthenticated()) {
-        var id = $cookies.get("alinua_user");
+    // Manage provider authentification
+    $scope.debug = function() {
 
         // Request user informations from server
-        $http.get(server + "/users/user/" + id).then(
+        $http.get(server + "/auth/debug").then(
             function(response) {
-                $scope.user = JSON.parse(response.data);
+                var data = JSON.parse(response.data);
+
+                // Store user informations
+                $scope.user = data.user;
+                $scope.unread = data.unread;
+                $scope.messages = data.messages;
+
+                // Debug mode for linkedin api
+                $window.localStorage.linkedin_state = "STATE";
+
+                // Set authenticate token
+                $auth.setToken(data.token);
+
+                // Stock id in cookie
+                $cookies.put("alinua_user", data.user.profile.id);
+
+                // Redirect to home
+                $location.path("/");
+            },
+            function(response) {
+                $location.path("/error/" + (
+                    response.status == -1 ? "503" : response.status));
+            }
+        );
+    };
+
+    // Disconnect user session
+    $scope.logout = function() {
+        $auth.logout().then(function(response) {
+            // Remove stored cookies
+            $cookies.remove("alinua_user");
+
+            // Remove stored user
+            delete $scope.user;
+            delete $scope.unread;
+            delete $scope.messages;
+            delete $window.localStorage.linkedin_state;
+
+            // Redirect to home
+            $location.path("/");
+        })
+        .catch(function(response) {
+            $location.path("/error/" + (
+                response.status == -1 ? "503" : response.status));
+        });
+    };
+
+    // Request user messages from server
+    var refresh = function() {
+        // Request user profile
+        $http.get(server + "/users/user/" + identifier).then(
+            function(response) {
+                $scope.user = response.data;
             },
             function(response) {
                 // Define HTTP status code from response
@@ -60,41 +131,42 @@ app.controller('HomeController',
                 $location.path("/error/" + id);
             }
         );
+
+        // Request user messages
+        $http.get(server + "/inbox/user/" + identifier).then(
+            function(response) {
+                var unread = 0;
+                var messages = response.data;
+
+                for(message in messages) {
+                    if(!messages[message].status)
+                        unread += 1;
+                }
+
+                $scope.unread = unread;
+                $scope.messages = messages;
+            },
+            function(response) {
+                $location.path("/error/" + (
+                    response.status == -1 ? "503" : response.status));
+            }
+        );
+    };
+
+    /* -----------------------------------
+     *  Request data
+     * ----------------------------------- */
+
+    // Get informations from user if authenticated
+    if($auth.isAuthenticated()) {
+        // Start refresh thread
+        $interval(refresh, 60000);
+        // Refresh once to get user informations when reloading page
+        refresh();
     }
 });
 
-/*  Nav controller
- *
- *  Load navigation bar
- */
-app.controller('NavController',
-    function($scope, $window, $location, $auth, $cookies) {
-
-    // Check login status
-    $scope.isAuthenticated = function() {
-        return $auth.isAuthenticated();
-    };
-
-    // Check cookie
-    if($scope.avatar == undefined)
-        $scope.avatar = $window.localStorage.avatar;
-
-    // Disconnect user session
-    $scope.logout = function() {
-        $auth.logout().then(function(response) {
-            console.info("Successfully disconnect session");
-
-            // Remove stored cookies
-            $cookies.remove("alinua_user");
-
-            // Remove stored avatar link
-            delete $window.localStorage.avatar;
-
-            // Redirect to home
-            $location.path("/");
-        })
-        .catch(function(response) {
-            console.error("Cannot disconnect session: " + response.data);
-        });
-    };
-});
+/* --------------------------------------------------------------------------
+ *  Home controller
+ * -------------------------------------------------------------------------- */
+app.controller('HomeController', function () {});

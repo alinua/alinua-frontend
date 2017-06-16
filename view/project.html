@@ -1,0 +1,52 @@
+<section class="card">
+    <header>
+        <h1>{{ project.title }}</h1>
+
+        <h2>
+            <ul>
+                <li ng-show="project.description.url">
+                    <i class="fa fa-globe fa-fw"></i>
+                    <a href="{{ project.description.url }}">{{ project.description.url }}</a>
+                </li>
+            </ul>
+        </h2>
+    </header>
+
+    <nav class="job-nav">
+        <ul>
+            <li ng-if="owner">
+                <a href="">
+                    <i class="fa fa-edit fa-lw"></i>Edit
+                </a>
+            </li>
+
+            <li ng-if="owner">
+                <a href="">
+                    <i class="fa fa-remove fa-lw"></i>Remove
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <article ng-show="project.description.content">
+        <header>
+            <h1>Description</h1>
+        </header>
+
+        <p>{{ project.description.content }}</p>
+    </article>
+
+    <article ng-show="project.members">
+        <header>
+            <h1>
+                Members
+            </h1>
+        </header>
+
+        <ul ng-repeat="member in project.members">
+            <li>
+                {{ member.profile.firstName }} {{ member.profile.lastName | uppercase }}
+            </li>
+        </ul>
+    </article>
+</section>

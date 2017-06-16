@@ -1,0 +1,31 @@
+<section>
+    <header>
+        <h1>Annonce</h1>
+    </header>
+
+    <article>
+        <form name="form" ng-submit="submit(form)">
+            <span>
+                <label>Titre</label>
+                <input type="text" name="title" value="{{ job.title }}" required />
+            </span>
+
+            <span>
+                <label>Description</label>
+                <textarea name="description" required>{{ job.description }}</textarea>
+            </span>
+
+            <span>
+                <label>Emplacement</label>
+                <input type="text" name="location" value="{{ job.location }}" required />
+            </span>
+
+            <span>
+                <label>Date de validité</label>
+                <input type="date" name="validity" value="{{ job.validity }}" required />
+            </span>
+
+            <input type="submit" value="Soumettre" />
+        </form>
+    </article>
+</section>

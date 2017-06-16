@@ -8,61 +8,81 @@ var app = angular.module("inbox", []);
 // Server url
 var server = "http://localhost:3000";
 
-/*  User profile
+/* --------------------------------------------------------------------------
+ *  Inbox controller
  *
- *  Load register user profile
+ *  Loading user messages
  *
  *  Notes
  *  -----
  *  This page need to be authenticated to access
- */
+ * -------------------------------------------------------------------------- */
 app.controller('InboxController',
-    function($scope, $route, $http, $location, $auth, $cookies) {
+    function($auth, $cookies, $http, $location, $scope) {
 
     // Check login status
-    if(!$auth.isAuthenticated()) {
+    if(!$auth.isAuthenticated())
         $location.path('/error/401');
-    }
 
-    // Get user id from cookie
-    var id = $cookies.get("alinua_user");
+    /* -----------------------------------
+     *  Variables
+     * ----------------------------------- */
 
-    $scope.show_message = false;
+    $scope.loading = true;
 
-    // Request user informations from server
-    $http.get(server + "/inbox/user/" + id).then(
-        function(response) {
-            $scope.messages = response.data;
-        },
-        function(response) {
-            // Define HTTP status code from response
-            var id = (response.status == -1 ? "503" : response.status);
+    // Get cookie content
+    var identifier = $cookies.get("alinua_user");
 
-            $location.path("/error/" + id);
-        }
-    );
+    /* -----------------------------------
+     *  Functions
+     * ----------------------------------- */
 
+    // Show message content when user click on title
     $scope.show = function(message) {
-        $scope.show_message = true;
         $scope.message_data = message;
     };
 
+    // CHange message status when user click on icon
     $scope.mark = function(message) {
         // Request user informations from server
-        $http.get(server + "/inbox/user/" + id + "/" + message.id + "/status").then(
+        $http.get(server + "/inbox/user/" + identifier + "/" + message.id + "/status").then(
             function(response) {
                 $scope.messages[message.id].status = response.data.status;
 
-                $route.reload();
+                // Update navigation bar
+                if(response.data.status)
+                    $scope.$parent.unread -= 1;
+                else
+                    $scope.$parent.unread += 1;
             },
             function(response) {
-                // Define HTTP status code from response
-                var id = (response.status == -1 ? "503" : response.status);
-
-                $location.path("/error/" + id);
+                $location.path("/error/" + (
+                    response.status == -1 ? "503" : response.status));
             }
         );
     };
+
+    /* -----------------------------------
+     *  Request data
+     * ----------------------------------- */
+
+    $http.get(server + "/inbox/user/" + identifier).then(
+        function(response) {
+            $scope.messages = response.data;
+
+            $scope.unread = 0;
+            for(message in response.data) {
+                if(!$scope.messages[message].status)
+                    $scope.unread += 1;
+            }
+
+            $scope.loading = false;
+        },
+        function(response) {
+            $location.path("/error/" + (
+                response.status == -1 ? "503" : response.status));
+        }
+    );
 });
 
 

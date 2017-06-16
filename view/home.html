@@ -1,50 +1,52 @@
-<section class="no-grid center banner" ng-if="!isAuthenticated()">
+<section class="banner banner-alinua">
     <header>
-        <h1>How to start ?</h1>
+        <h1>L'université d'Angers vous présente AlinUA</h1>
     </header>
 
     <aside>
-        <p>Login with a LinkedIn account and start to use AlinUA platform !</p>
-
-        <br />
-
-        <button class="login" ng-click="authenticate()">
-            <i class="fa fa-linkedin fa-lw"></i>Sign in with LinkedIn
-        </button>
+        <p>
+            Une plateforme dédiée aux étudiants pour leur permettre de faciliter leurs recherches professionnelles une fois leurs études terminées.
+        </p>
     </aside>
 </section>
 
-<section class="no-grid center banner" ng-if="isAuthenticated()">
+<section class="banner">
     <header>
-        <h1>Welcome {{ user.profile.firstName }} {{ user.profile.lastName | uppercase }}</h1>
-    </header>
-</section>
-
-<section class="no-grid">
-    <header>
-        <h1>How it's work ?</h1>
+        <h1>Une plateforme étudiante</h1>
     </header>
 
     <aside class="grid homogeneous">
         <div>
             <span>
                 <p>
-                    <i class="fa fa-users fa-5x fa-fw"></i><br />
-                    <b>A student platform for students</b>
+                    <i class="fa fa-briefcase fa-5x fa-fw"></i><br />
+                    <b>Découvrez les projets des autres étudiants</b>
                 </p>
             </span>
             <span>
                 <p>
                     <i class="fa fa-newspaper-o fa-5x fa-fw"></i><br />
-                    <b>Find your dreamed job</b>
+                    <b>Suivez les dernières annonces de jobs</b>
                 </p>
             </span>
             <span>
                 <p>
                     <i class="fa fa-address-book fa-5x fa-fw"></i><br />
-                    <b>Create and improve your profile easily</b>
+                    <b>Importez facilement votre profil depuis LinkedIn</b>
                 </p>
             </span>
         </div>
+    </aside>
+</section>
+
+<section ng-if="!isAuthenticated()" class="banner banner-register">
+    <header>
+        <h1>Connectez-vous dés maintenant</h1>
+    </header>
+
+    <aside>
+        <button ng-click="authenticate()">
+            <i class="fa fa-linkedin fa-fw"></i>Connexion via LinkedIn
+        </button>
     </aside>
 </section>

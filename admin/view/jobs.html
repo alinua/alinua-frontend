@@ -1,21 +1,21 @@
 <section class="listing">
     <article>
         <header>
-            <h1>Registered jobs</h1>
+            <h1>Annonces publiées</h1>
         </header>
 
         <aside class="grid">
             <div class="header">
                 <span class="full">
-                    Title
+                    Titre
                 </span>
                 <span class="center">
                 </span>
                 <span class="center">
-                    Author
+                    Auteur
                 </span>
                 <span class="center">
-                    Published
+                    Publication
                 </span>
                 <span class="center">
                     Status
@@ -29,7 +29,7 @@
                     </a>
                 </span>
                 <span class="center">
-                    <a href="../#!/jobs/job/{{ job.id }}">
+                    <a href="../#!/jobs/{{ job.id }}">
                         <i class="fa fa-eye fa-fw"></i></a>
                     <a ng-click="onChangeStatus(job.id, true)">
                         <i class="fa fa-check fa-fw"></i></a>
@@ -43,10 +43,10 @@
                     {{ job.date }}
                 </span>
                 <span ng-if="job.status" class="allow">
-                    <i class="fa fa-check-circle fa-fw"></i>Allow
+                    <i class="fa fa-check-circle fa-fw"></i>Autorisée
                 </span>
                 <span ng-if="!job.status" class="disallow">
-                    <i class="fa fa-times-circle fa-fw"></i>Disallow
+                    <i class="fa fa-times-circle fa-fw"></i>Non autorisée
                 </span>
             </div>
         </aside>

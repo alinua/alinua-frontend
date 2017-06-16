@@ -5,7 +5,7 @@
 body {
     margin-top: 60px;
 
-    background-color: #D9D9D9;
+    background-color: #181818;
 
     background-image: url("../img/noise.png");
 
@@ -35,8 +35,13 @@ body > header > h1 {
     font-weight: 600;
 }
 
-body > header > h1 > a { color: rgb(40, 130, 173); }
-body > header > h1 > a > i { margin-right: 8px; }
+body > header > h1 > a {
+    color: rgb(40, 130, 173);
+}
+
+body > header > h1 > a > i {
+    margin-right: 8px;
+}
 
 /* --------------------------------------------------------------------------
  *  Navigation
@@ -71,6 +76,18 @@ body > nav > ul > ul > li {
     font-variant: small-caps;
 }
 
+body > nav > ul > li > a > b,
+body > nav > ul > ul > li > a > b {
+    margin-left: 8px;
+
+    font-weight: 400;
+}
+
+body > nav > ul > li.responsive > a > b,
+body > nav > ul > ul > li.responsive > a > b {
+    display: none;
+}
+
 body > nav > ul > ul,
 body > nav > ul > li:nth-child(1n+2) {
     padding-left: 4px;
@@ -78,7 +95,9 @@ body > nav > ul > li:nth-child(1n+2) {
     border-left: 1px solid rgba(40, 130, 173, 0.2);
 }
 
-body > nav > ul > ul { display: inline; }
+body > nav > ul > ul {
+    display: inline;
+}
 
 body > nav > ul > li > a,
 body > nav > ul > ul > li > a {
@@ -100,18 +119,16 @@ body > nav > ul > ul > li > a:hover {
     border-radius: 4px;
 }
 
-body > nav > ul > li > a > i,
-body > nav > ul > li > a > img { margin-right: 4px; }
-
-body > nav > ul > li > a > img {
+body > nav > ul > ul > li > a > img {
     position: relative;
     top: -2px;
 
     display: inline-block;
+    width: 24px;
+
+    border-radius: 12px;
 
     vertical-align: middle;
-
-    border-radius: 4px;
 }
 
 /* --------------------------------------------------------------------------
@@ -131,17 +148,43 @@ body > footer > small {
 }
 
 /* Footer listing */
-body > footer > small > ul {
-    margin-bottom: 8px;
+body > footer > div {
+    display: table;
+    width: 50%;
+    margin: 0 auto;
+}
 
-    text-align: center;
+body > footer > div > ul {
+    display: table-cell;
+    width: 25%;
+    margin-bottom: 8px;
 
     list-style: none;
 }
 
-body > footer > small > ul > li { display: inline-block; }
-body > footer > small > ul > li > a { color: grey; }
-body > footer > small > ul > li > a:hover { color: rgb(40, 130, 173); }
+body > footer > div > ul > li {
+    margin: 8px 0;
+
+    font-size: 14pt;
+
+    text-align: center;
+}
+
+body > footer > div > ul > li > a {
+    display: block;
+    margin: 0 auto;
+    width: 80px;
+
+    color: grey;
+
+    text-align: left;
+
+    white-space: nowrap;
+}
+
+body > footer > div > ul > li > a:hover {
+    color: rgb(40, 130, 173);
+}
 
 /* --------------------------------------------------------------------------
  *  Main content
@@ -149,6 +192,8 @@ body > footer > small > ul > li > a:hover { color: rgb(40, 130, 173); }
 
 body > main {
     width: 100%;
+
+    background-color: #DBDBDB;
 }
 
 body > main > nav,
@@ -156,37 +201,10 @@ body > main > section {
     width: 80%;
 
     margin: 0 auto;
-    padding: 16px;
+    padding: 32px 16px;
 
     vertical-align: top;
 }
-
-body > main > section.no-grid {
-    display: block;
-
-    width: 100%;
-}
-
-body > main > section.banner {
-    height: 320px;
-
-    background: no-repeat top/cover url("../img/banner.jpg");
-}
-
-body > main > section.banner > * {
-    display: inline;
-
-    vertical-align: middle;
-}
-
-body > main > section.banner > header > h1,
-body > main > section.banner > aside > p {
-    color: white;
-
-    text-shadow: black 0 0 4px;
-}
-
-body > main > section.banner > aside > p { font-size: 14pt; }
 
 /* --------------------------------------------------------------------------
  *  Multiple content
@@ -215,10 +233,14 @@ body > main > section > footer > h3 {
 }
 
 body > main > section > header > h2,
-body > main > section > footer > h2 { font-size: 14pt; }
+body > main > section > footer > h2 {
+    font-size: 14pt;
+}
 
 body > main > section > header > h3,
-body > main > section > footer > h3 { font-size: 12pt; }
+body > main > section > footer > h3 {
+    font-size: 12pt;
+}
 
 body > main > section > header,
 body > main > section > footer {
@@ -241,7 +263,7 @@ body > main > section > article {
  *  Listing
  * -------------------------------------------------------------------------- */
 
-body > main > section.listing > article {
+.listing > article {
     display: table;
 
     width: 100%;
@@ -252,40 +274,44 @@ body > main > section.listing > article {
     border-spacing: 8px;
 }
 
-body > main > section.listing.cards > article > aside {
+.listing.side > article,
+.listing.cards > article > aside {
     display: table-cell;
 
     vertical-align: top;
 }
 
-body > main > section.listing.cards > article > aside:first-child {
+.listing.cards > article > aside:first-child {
     padding-right: 16px;
 }
 
-body > main > section.listing.cards > article > aside:first-child > * {
-    box-shadow: 0 0 2px rgba(80, 80, 80, 0.5);
-
-    border-radius: 4px;
+.listing.inbox > article > aside:first-child {
+    border-right: 2px solid rgba(40, 130, 173, 0.2);
 }
 
-body > main > section.listing.cards > article > aside:last-child {
+.listing.inbox > article > aside:last-child {
+    padding-left: 8px;
+}
+
+.listing.side > article:last-child,
+.listing.cards > article > aside:last-child {
     width: 100%;
 }
 
-body > main > section.listing > article > header,
-body > main > section.listing > article > aside > header {
+.listing > article > header,
+.listing > article > aside > header {
     margin-bottom: 8px;
 }
 
-body > main > section.listing > article > header > h1,
-body > main > section.listing > article > aside > header > h1 {
+.listing > article > header > h1,
+.listing > article > aside > header > h1 {
     font-size: 16pt;
     font-weight: 500;
     font-variant: small-caps;
 }
 
-body > main > section.listing > article > header > h2,
-body > main > section.listing > article > aside > header > h2 {
+.listing > article > header > h2,
+.listing > article > aside > header > h2 {
     padding-top: 8px;
 
     color: grey;
@@ -293,31 +319,44 @@ body > main > section.listing > article > aside > header > h2 {
     font-size: 12pt;
 }
 
-body > main > section.listing > article > header > h1 > a,
-body > main > section.listing > article > aside > header > h1 > a {
+.listing > article > header > h1 > a,
+.listing > article > aside > header > h1 > a {
     color: rgb(173, 40, 40);
 }
 
-body > main > section.listing > article > p,
-body > main > section.listing > article > aside > p {
+.listing > article > aside > i,
+.listing > article > aside > img {
+    width: 64px;
+    height: 64px;
+
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 32px;
+}
+
+.listing > article > aside > i {
+    text-align: center;
+}
+
+.listing > article > p,
+.listing > article > aside > p {
     margin: 8px auto;
 
     text-align: justify;
 }
 
-body > main > section.listing > article > footer,
-body > main > section.listing > article > aside > footer {
-    margin-top: 8px;
+.listing > article > footer,
+.listing > article > aside > footer {
+    margin-top: 16px;
 
     color: grey;
 }
 
-body > main > section.listing > article > footer > ul,
-body > main > section.listing > article > aside > footer > ul {
+.listing > article > footer > ul,
+.listing > article > aside > footer > ul {
     list-style: none;
 }
 
-body > main > section.listing > article > footer > ul > li {
+.listing > article > footer > ul > li {
     display: inline-block;
 
     margin-right: 16px;
@@ -327,39 +366,39 @@ body > main > section.listing > article > footer > ul > li {
  *  Card
  * -------------------------------------------------------------------------- */
 
-body > main > section.card > header > h1 {
+.card > header > h1 {
     font-variant: small-caps;
 }
 
-body > main > section.card > header > h2 > ul {
+.card > header > h2 > ul {
     list-style: none;
 }
 
-body > main > section.card > header > h2 > ul > li {
+.card > header > h2 > ul > li {
     display: inline-block;
 
     margin: 4px 8px;
 }
 
-body > main > section.card > header > h3 > a {
+.card > header > h3 > a {
     margin: 0 4px;
 
     color: black;
 }
 
-body > main > section.card > header > h3 > a:hover {
+.card > header > h3 > a:hover {
     color: rgb(173, 40, 40);
 
     text-decoration: none;
 }
 
-body > main > section.card > header > h3 > ul.tags {
+.card > header > h3 > ul.tags {
     margin: 16px;
 
     list-style: none;
 }
 
-body > main > section.card > header > h3 > ul.tags > li {
+.card > header > h3 > ul.tags > li {
     display: inline-block;
 
     margin: 4px;
@@ -374,73 +413,73 @@ body > main > section.card > header > h3 > ul.tags > li {
     font-weight: 500;
 }
 
-body > main > section.card > aside {
+.card > aside {
     text-align: center;
 
     vertical-align: middle;
 }
 
-body > main > section.card > aside > img {
+.card > aside > img {
     width: 150px;
 
     border: 2px solid white;
-    border-radius: 75px;
 
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+    border-radius: 75px;
+    box-shadow: 0 4px 2px rgba(0, 0, 0, 0.2);
 }
 
-body > main > section.card > article {
+.card > article {
     border: 1px solid rgba(40, 130, 173, 0.2);
     border-bottom: 4px solid rgb(40, 130, 173);
 }
 
-body > main > section.card > article > header {
+.card > article > header {
     margin-bottom: 16px;
 }
 
-body > main > section.card > article > header > h1 {
+.card > article > header > h1 {
     font-size: 16pt;
     font-weight: 500;
 }
 
-body > main > section.card > article > ul > li {
+.card > article > ul > li {
     margin: 8px 0;
 }
 
-body > main > section.card > article > ul > li > i {
+.card > article > ul > li > i {
     margin-right: 8px;
 }
 
-body > main > section.card > article > p {
+.card > article > p {
     text-align: justify;
 }
 
-body > main > section.card > article > aside.card-position {
+.card > article > aside.card-position {
     padding: 8px 16px;
 }
 
-body > main > section.card > article > aside.card-position:nth-child(2n+1) {
+.card > article > aside.card-position:nth-child(2n+1) {
     margin-top: 32px;
 }
 
-body > main > section.card > article > aside.card-position.false {
+.card > article > aside.card-position.false {
     border-left: 4px solid rgba(173, 40, 40, 0.8);
 }
 
-body > main > section.card > article > aside.card-position.true {
+.card > article > aside.card-position.true {
     border-left: 4px solid rgba(96, 173, 40, 0.8);
 }
 
-body > main > section.card > article > aside.card-position > header {
+.card > article > aside.card-position > header {
     margin-bottom: 8px;
 }
 
-body > main > section.card > article > aside.card-position > header > h1 {
+.card > article > aside.card-position > header > h1 {
     font-size: 14pt;
     font-weight: 600;
 }
 
-body > main > section.card > article > aside.card-position > header > h2 {
+.card > article > aside.card-position > header > h2 {
     margin: 8px auto;
 
     font-size: 12pt;
@@ -448,11 +487,11 @@ body > main > section.card > article > aside.card-position > header > h2 {
     color: grey;
 }
 
-body > main > section.card > article > aside.card-position > p {
+.card > article > aside.card-position > p {
     margin: 16px 8px;
 }
 
-body > main > section.card > article > aside.card-position > footer {
+.card > article > aside.card-position > footer {
     margin-top: 8px;
     padding-top: 8px;
 
@@ -461,93 +500,21 @@ body > main > section.card > article > aside.card-position > footer {
     border-top: 1px solid lightgrey;
 }
 
-body > main > section.card > article > aside.card-position > footer > ul {
+.card > article > aside.card-position > footer > ul {
     list-style: none;
 }
 
-body > main > section.card > article > aside.card-position > footer > ul > li {
+.card > article > aside.card-position > footer > ul > li {
     display: inline-block;
 
     margin-right: 8px;
 }
 
 /* --------------------------------------------------------------------------
- *  Sidebar
- * -------------------------------------------------------------------------- */
-
-body > main > nav > section > aside {
-    margin-bottom: 32px;
-    padding: 16px;
-
-    background-color: white;
-
-    border-radius: 6px 6px 0 0;
-}
-
-body > main > nav > section:first-child > aside {
-    border: 1px solid rgba(173, 40, 40, 0.2);
-    border-bottom: 4px solid rgb(173, 40, 40);
-}
-
-body > main > nav > section:last-child > aside {
-    border: 1px solid rgba(40, 130, 173, 0.2);
-    border-bottom: 4px solid rgb(40, 130, 173);
-}
-
-body > main > nav > section > aside > header > h1 {
-    margin-bottom: 16px;
-
-    font-size: 16pt;
-    font-variant: small-caps;
-
-    text-align: center;
-}
-
-body > main > nav > section > aside > ul {
-    font-size: 14pt;
-
-    list-style: none;
-}
-
-body > main > nav > section > aside > ul > li {
-    padding: 2px 0;
-
-    white-space: nowrap;
-}
-
-body > main > nav > section > aside > ul > li > i {
-    padding-right: 4px;
-}
-
-body > main > nav > section > aside > ul > li > a {
-    width: 100%;
-
-    color: black;
-}
-
-body > main > nav > section > aside.sidelinks > ul {
-    text-align: center;
-
-    list-style: none;
-}
-
-body > main > nav > section > aside.sidelinks > ul > li {
-    display: inline-block;
-}
-
-body > main > nav > section > aside.sidelinks > ul > li > a {
-    color: black;
-}
-
-body > main > nav > section > aside.sidelinks > ul > li > a:hover {
-    color: rgb(40, 130, 173);
-}
-
-/* --------------------------------------------------------------------------
  *  Filters
  * -------------------------------------------------------------------------- */
 
-body > main > section > aside > div.filters {
+.filters {
     display: table;
 
     width: 100%;
@@ -555,7 +522,7 @@ body > main > section > aside > div.filters {
     border-spacing: 0 4px;
 }
 
-body > main > section > aside > div.filters > span {
+.filters > span {
     display: table-cell;
 
     padding-right: 16px;
@@ -565,7 +532,7 @@ body > main > section > aside > div.filters > span {
     white-space: nowrap;
 }
 
-body > main > section > aside > div.filters > span:last-child {
+.filters > span:last-child {
     width: 100%;
 
     padding-right: 0;
@@ -573,19 +540,19 @@ body > main > section > aside > div.filters > span:last-child {
     text-align: right;
 }
 
-body > main > section > aside > div.filters > span > label,
-body > main > section > aside > div.filters > span > input,
-body > main > section > aside > div.filters > span > select {
+.filters > span > label,
+.filters > span > input,
+.filters > span > select {
     display: inline-block;
 }
 
-body > main > section > aside > div.filters > span > label,
-body > main > section > aside > div.filters > span > label > i {
+.filters > span > label,
+.filters > span > label > i {
     padding-right: 8px;
 }
 
-body > main > section > aside > div.filters > span > input,
-body > main > section > aside > div.filters > span > select {
+.filters > span > input,
+.filters > span > select {
     padding: 4px 8px;
 
     color: black;
@@ -640,87 +607,61 @@ body > main > section > aside > div.filters > span > select {
 }
 
 /* --------------------------------------------------------------------------
- *  Simple content
+ *  Banners
  * -------------------------------------------------------------------------- */
 
-aside.note {
-    margin: 96px 32px;
+.banner {
+    display: block;
+    width: 100%;
+    padding: 64px 0 !important;
 
-    background-color: #FFFECC;
-    box-shadow: 0 4px 8px rgba(80, 80, 80, 0.5);
-
-    border-radius: 4px;
+    text-align: center;
 }
 
-aside.note > header {
+.banner > aside {
     padding: 16px;
 }
 
-aside.note > header > h1 {
-    font-size: 14pt;
-    font-weight: bold;
-}
-
-aside.note > div {
-    padding: 8px 16px 16px;
-
-    font-size: 12pt;
-}
-
-aside.note > div ul {
-    margin-left: 16px;
-}
-
-/* --------------------------------------------------------------------------
- *  Misc
- * -------------------------------------------------------------------------- */
-
-.fa-lw { width:1.28571429em; text-align: left; }
-
-.center { text-align: center !important; }
-
-.important { color: rgb(173, 40, 40); }
-
-.login {
-    display: inline-block;
-
-    margin: 16px auto;
-    padding: 12px;
-
+.banner > header > h1,
+.banner > aside > p {
     color: white;
-    background-color: #0078B6;
 
-    border: none;
-
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(200, 200, 200, 0.5);
-
-    font-size: 14pt;
-    font-weight: 500;
-
-    vertical-align: middle;
+    text-shadow: 1px 1px 2px #181818;
 }
 
-.login:hover {
-    text-decoration: underline;
+.banner > aside > p { font-size: 14pt; }
+
+.banner-alinua {
+    background: no-repeat left/cover url("../img/banner.png");
+}
+
+.banner-register {
+    background-color: #2882AD;
+}
+
+.banner-register > aside > button {
+    display: block;
+    margin: 8px auto;
+    padding: 12px 32px;
+
+    color: #2882AD;
+    background-color: white;
+
+    border: 2px solid white;
+    border-radius: 42px;
+}
+
+.banner-register > aside > button:hover {
+    color: white;
+    background-color: #2882AD;
+    border: 2px solid white;
 
     cursor: pointer;
 }
 
-.login > i { font-size: 20pt; }
-
-.login:active {
-    background-color: #006AB6;
-
-    box-shadow: 0 2px 2px rgb(100, 100, 100);
+.banner-register > aside > button > i {
+    margin-right: 6px;
 }
-
-.no-dot { list-style: none; }
-
-.full { width: 100% !important; }
-
-.allow { text-shadow: 0 1px 1px lightgrey; color: #a1b56c; }
-.disallow { text-shadow: 0 1px 1px lightgrey; color: #ab4642; }
 
 /* --------------------------------------------------------------------------
  *  Form
@@ -764,7 +705,19 @@ section > article > form > span > textarea {
 
     padding: 8px;
 
-    border: 1px solid lightgrey;
+    color: black;
+    background-color: white;
+
+    border: 2px solid rgba(40, 130, 173, 0.2);
+
+    font-size: 14pt;
+
+    border-radius: 4px;
+}
+
+section > article > form > span > input:focus,
+section > article > form > span > textarea:focus {
+    border: 2px solid rgb(40, 130, 173);
 }
 
 section > article > form > span > textarea {
@@ -779,10 +732,21 @@ section > article > form > input[type="submit"] {
     display: block;
 
     margin: 0 auto;
+    padding: 8px 16px;
 
-    background-color: lightgrey;
+    color: rgb(40, 130, 173);
+    background-color: white;
 
-    border: 1px solid grey;
+    border: 2px solid rgb(40, 130, 173);
+
+    border-radius: 24px;
+}
+
+section > article > form > input[type="submit"]:hover {
+    color: white;
+    background-color: rgb(40, 130, 173);
+
+    cursor: pointer;
 }
 
 /* --------------------------------------------------------------------------
@@ -793,6 +757,8 @@ section > article > form > input[type="submit"] {
     display: table;
 
     margin: 0 auto;
+
+    border-spacing: 8px;
 }
 
 .grid > div {
@@ -801,25 +767,22 @@ section > article > form > input[type="submit"] {
 
 .grid > div > span {
     display: table-cell;
-
-    vertical-align: middle;
+    padding: 4px 8px;
 
     white-space: nowrap;
 
-    padding: 4px 8px;
+    vertical-align: middle;
 }
 
 .homogeneous > div > span {
     width: 25%;
-}
-
-.grid > div > span > p {
     padding: 32px;
 
     background-color: white;
-    box-shadow: 0 4px 8px rgba(80, 80, 80, 0.5);
 
     text-align: center;
+
+    white-space: word-wrap;
 }
 
 .grid > div > span > p > i {
@@ -832,64 +795,131 @@ section > article > form > input[type="submit"] {
 }
 
 /* --------------------------------------------------------------------------
+ *  Misc
+ * -------------------------------------------------------------------------- */
+
+.fa-rm { margin-right: 6px; }
+.fa-lw { width:1.3em; margin-right: 4px; }
+
+.full { width: 100% !important; }
+.no-dot { list-style: none; }
+.center { text-align: center !important; }
+.important { color: rgb(173, 40, 40); }
+
+.allow { text-shadow: 0 1px 1px lightgrey; color: #a1b56c; }
+.disallow { text-shadow: 0 1px 1px lightgrey; color: #ab4642; }
+
+.loading > i { margin: 32px 0; color: rgba(0, 0, 0, 0.2); }
+
+/* --------------------------------------------------------------------------
  *  Responsive design
  * -------------------------------------------------------------------------- */
 
-@media screen and (max-width: 800px) {
-    body > main,
-    body > main > div,
-    .grid,
-    .grid > div,
-    .grid > div > span {
-        display: block;
-
+@media screen and (max-width: 1200px) {
+    body > main > section {
         width: 100%;
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
     body {
         margin-top: 0;
     }
 
-    body > nav {
+    body > header,
+    body > nav,
+    body > nav > ul {
         position: relative;
+        top: 0;
+        left: 0;
+        right: 0;
     }
 
-    body > nav > header,
-    body > nav > ul {
-        display: table-row;
+    body > header {
+        padding: 8px 16px 4px;
+
+        background-color: white;
 
         text-align: center;
     }
 
-    body > nav > ul {
+    body > nav {
+        height: auto;
+        padding: 16px;
+    }
+
+    body > nav > ul > li, body > nav > ul > ul, body > nav > ul > ul > li {
+        display: block;
+
         text-align: left;
     }
 
-    body > nav > ul > li,
-    body > nav > ul > li > a {
-        display: block;
-    }
-
-    body > main > section > aside > div.filters > div {
-        display: table-row;
-    }
-
-    body > main > section > aside > div.filters > div > * {
-        display: table-cell;
-
-        padding: 8px 0;
-    }
-
-    body > main > section > aside > div.filters > div > input,
-    body > main > section > aside > div.filters > div > select {
-        width: 100%;
-    }
-
-    body > nav > ul > li:nth-child(1n+2) {
-        padding-left: 0;
+    body > nav > ul > ul, body > nav > ul > li:nth-child(n+2) {
+        padding: 0;
 
         border: none;
     }
+
+    body > nav > ul > li > a, body > nav > ul > ul > li > a {
+        display: block;
+        margin: 8px 0;
+        padding: 8px !important;
+
+        background-color: #F3F3F3;
+
+        font-size: 16pt;
+
+        border-radius: 2px;
+    }
+
+    body > nav > ul > li.responsive > a > b,
+    body > nav > ul > ul > li.responsive > a > b {
+        display: inline-block;
+    }
+
+    body > nav > ul > ul > li:hover > ul {
+        display: none;
+    }
+
+    body > footer > div {
+        width: 100%;
+    }
+
+    .grid, .grid > div, .grid > div > span,
+    body > main > section.banner > * {
+        display: block;
+    }
+
+    .grid > div > span {
+        white-space: word-wrap;
+    }
+
+    .homogeneous > div > span {
+        width: 90%;
+        margin: 8px auto;
+    }
+}
+
+/* --------------------------------------------------------------------------
+ *  Animations
+ * -------------------------------------------------------------------------- */
+
+@keyframes blink {
+    0% { opacity: 0.5; }
+    30% { opacity: 1; }
+    70% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+@-webkit-keyframes blink {
+    0% { opacity: 0; }
+    30% { opacity: 1; }
+    70% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.blink {
+    animation: blink 3s ease-in-out infinite;
+    -moz-animation: blink 3s ease-in-out infinite;
+    -webkit-animation: blink 3s ease-in-out infinite;
 }

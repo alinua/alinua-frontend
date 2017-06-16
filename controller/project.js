@@ -1,25 +1,25 @@
 /* --------------------------------------------------------------------------
- *  Users manager
+ *  Projects manager
  *
- *  Load users list and user's profile
+ *  Controllers using to manage jobs (informations, listing, ...)
  * -------------------------------------------------------------------------- */
 
 // Modules
-var app = angular.module("user", []);
+var app = angular.module("project", []);
 
 // Server url
 var server = "http://localhost:3000";
 
 /* --------------------------------------------------------------------------
- *  Network controller
+ *  Projects controller
  *
- *  Loading users list (defautl sorting: last name)
+ *  Loading projects list (defautl sorting: date)
  *
  *  Notes
  *  -----
  *  This page need to be authenticated to access
  * -------------------------------------------------------------------------- */
-app.controller('NetworkController',
+app.controller('ProjectsController',
     function($auth, $http, $location, $scope) {
 
     /* -----------------------------------
@@ -28,22 +28,21 @@ app.controller('NetworkController',
 
     $scope.loading = true;
 
-    $scope.reverse = false;
-    $scope.order = "lastName";
+    $scope.reverse = true;
+    $scope.order = "date";
 
     /* -----------------------------------
      *  Request data
      * ----------------------------------- */
 
-    // Request users list from server
-    $http.get(server + "/users").then(
+    // Request jobs list from server
+    $http.get(server + "/projects").then(
         function(response) {
-            $scope.users = [];
+            $scope.projects = [];
 
-            for(user in response.data) {
-                // Only see validate users
-                if(response.data[user].status)
-                    $scope.users.push(response.data[user]);
+            for(project in response.data) {
+                if(response.data[project].status)
+                    $scope.projects.push(response.data[project]);
             }
 
             $scope.loading = false;
@@ -56,24 +55,21 @@ app.controller('NetworkController',
 });
 
 /* --------------------------------------------------------------------------
- *  User controller
+ *  Project controller
  *
- *  Loading user informations
+ *  Loading project informations
  *
- *  /profile
- *      Loading informations from identifier stored in cookie
- *
- *  /network/user/:id
+ *  /projects/project/:id
  *      Loading informations from url identifier
  *
  *  Notes
  *  -----
  *  This page need to be authenticated to access
  * -------------------------------------------------------------------------- */
-app.controller('UserController',
+app.controller('ProjectController',
     function($auth, $cookies, $http, $location, $routeParams, $scope) {
 
-    // Check login status
+    // Check authentification
     if(!$auth.isAuthenticated())
         $location.path('/error/401');
 
@@ -83,32 +79,22 @@ app.controller('UserController',
 
     $scope.loading = true;
 
-    // Get cookie if current path is profile
-    if($location.path() == "/profile")
-        var identifier = $cookies.get("alinua_user");
-
-    // Get url identifier instead
-    else
-        var identifier = $routeParams.id;
+    // Get cookie content
+    // var identifier = $cookies.get("alinua_user");
 
     /* -----------------------------------
      *  Request data
      * ----------------------------------- */
 
-    // Request user informations from server
-    $http.get(server + "/users/user/" + identifier).then(
+    // Request job informations from server
+    $http.get(server + "/projects/project/" + $routeParams.id).then(
         function(response) {
-            var user = JSON.parse(response.data);
+            $scope.project = response.data;
+            $scope.loading = false;
 
-            // Check if user was allowed
-            if(user.status) {
-                $scope.user = user;
-                $scope.loading = false;
-            }
-
-            // Redirect if disallow
-            else
-                $location.path("/error/403");
+            $scope.owner = false;
+            // if(response.data.user.profile.id === identifier)
+                // $scope.owner = true;
         },
         function(response) {
             $location.path("/error/" + (

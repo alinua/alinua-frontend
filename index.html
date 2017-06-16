@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" ng-app="alinua">
     <head>
         <title>Alinua</title>
 
@@ -42,11 +42,14 @@
         <script src="controller/user.js"></script>
         <script src="controller/inbox.js"></script>
         <script src="controller/error.js"></script>
+        <script src="controller/project.js"></script>
+<!--
         <script src="controller/admin/user.js"></script>
         <script src="controller/admin/job.js"></script>
+-->
     </head>
 
-    <body ng-app="alinua">
+    <body ng-controller="AlinuaController as main">
         <!-- Header -->
         <header>
             <h1>
@@ -57,40 +60,84 @@
         </header>
 
         <!-- Navigation links -->
-        <nav ng-controller="NavController">
+        <nav>
             <ul>
-                <li>
+                <li class="responsive">
                     <a href="#!/">
-                        <i class="fa fa-home fa-lw"></i>Home
+                        <i class="fa fa-home fa-fw"></i><b>Accueil</b>
                     </a>
                 </li>
 
-                <li ng-if="isAuthenticated()">
-                    <a href="#!/jobs">
-                        <i class="fa fa-newspaper-o fa-lw"></i>Jobs
-                    </a>
-                </li>
-                <li ng-if="isAuthenticated()">
+                <ul>
+                    <li>
+                        <a href="#!/jobs">
+                            <i class="fa fa-newspaper-o fa-fw"></i><b>Annonces</b>
+                        </a>
+                    </li>
+
+                    <li ng-if="isAuthenticated()" class="responsive">
+                        <a href="#!/jobs/edit" title="Créer une annonce">
+                            <i class="fa fa-plus fa-fw"></i><b>Créer une annonce</b>
+                        </a>
+                    </li>
+                </ul>
+
+                <ul>
+                    <li>
+                        <a href="#!/projects">
+                            <i class="fa fa-briefcase fa-fw"></i><b>Projets</b>
+                        </a>
+                    </li>
+
+                    <li ng-if="isAuthenticated()" class="responsive">
+                        <a href="#!/projects" title="Créer un projet">
+                            <i class="fa fa-plus fa-fw"></i><b>Créer un projet</b>
+                        </a>
+                    </li>
+                </ul>
+
+                <li>
                     <a href="#!/network">
-                        <i class="fa fa-address-book fa-lw"></i>Network
+                        <i class="fa fa-users fa-fw"></i><b>Réseau</b>
                     </a>
                 </li>
-                <ul ng-if="isAuthenticated()">
-                    <li>
-                        <a href="#!/profile">
-                            <i ng-if="avatar == undefined" class="fa fa-address-card fa-fw"></i>
-                            <img ng-if="!avatar == undefined" data-ng-src="{{ avatar }}" class="fa fa-fw" />
+
+                <ul>
+                    <li ng-if="!isAuthenticated()">
+                        <a ng-click="authenticate()">
+                            <i class="fa fa-linkedin fa-fw"></i><b>Connexion</b>
                         </a>
                     </li>
-                    <li ng-controller="HomeController">
-                        <a href="#!/inbox">
-                            <i ng-if="user.unread == 0 || user.unread == undefined" class="fa fa-envelope-o fa-fw"></i>
-                            <i ng-if="user.unread > 0" class="fa fa-envelope fa-lw"></i>{{ user.unread }}
+
+                    <li ng-if="!isAuthenticated()">
+                        <a ng-click="debug()">
+                            <i class="fa fa-sign-in fa-fw"></i><b>Debug</b>
                         </a>
                     </li>
-                    <li>
-                        <a ng-click="logout()">
-                            <i class="fa fa-sign-out fa-fw"></i>
+
+                    <li ng-if="isAuthenticated()" class="responsive">
+                        <a ng-if="avatar == undefined" href="#!/profile" title="Mon profil">
+                            <img data-ng-src="static/img/user.jpg" class="fa fa-fw" /><b>Mon profil</b>
+                        </a>
+
+                        <a ng-if="!(avatar == undefined)" href="#!/profile" title="Mon profil">
+                            <img data-ng-src="{{ avatar }}" class="fa fa-fw" /><b>Mon profil</b>
+                        </a>
+                    </li>
+
+                    <li ng-if="isAuthenticated()">
+                        <a ng-if="unread == 0" href="#!/inbox">
+                            <i class="fa fa-envelope-o fa-fw"></i><b>{{ unread }}</b>
+                        </a>
+
+                        <a ng-if="unread > 0" href="#!/inbox">
+                            <i class="fa fa-envelope fa-fw blink"></i><b>{{ unread }}</b>
+                        </a>
+                    </li>
+
+                    <li ng-if="isAuthenticated()" class="responsive">
+                        <a ng-click="logout()" title="Déconnexion">
+                            <i class="fa fa-sign-out fa-fw"></i><b>Déconnexion</b>
                         </a>
                     </li>
                 </ul>
@@ -104,16 +151,63 @@
 
         <!-- Footer -->
         <footer>
-            <small>
+            <div>
                 <ul>
                     <li>
-                        <a href="https://github.com/alinua"><i class="fa fa-github fa-fw fa-3x"></i></a>
+                        <a href="#!/">
+                            <i class="fa fa-home fa-fw fa-rm"></i>Accueil
+                        </a>
                     </li>
+
                     <li>
-                        <a href="https://fontawesome.io"><i class="fa fa-font-awesome fa-fw fa-3x"></i></a>
+                        <a href="#!/network">
+                            <i class="fa fa-users fa-fw fa-rm"></i>Réseau
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#!/jobs">
+                            <i class="fa fa-newspaper-o fa-fw fa-rm"></i>Annonces
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#!/projects">
+                            <i class="fa fa-briefcase fa-fw fa-rm"></i>Projets
+                        </a>
                     </li>
                 </ul>
 
+                <ul>
+                    <li>
+                        <a href="#!/">
+                            <i class="fa fa-star fa-fw fa-rm"></i>À propos
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#!/">
+                            <i class="fa fa-book fa-fw fa-rm"></i>Aide
+                        </a>
+                    </li>
+                </ul>
+
+                <ul>
+                    <li>
+                        <a href="mailto:">
+                            <i class="fa fa-envelope fa-fw fa-rm"></i>Contact
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="https://github.com/alinua">
+                            <i class="fa fa-github fa-fw fa-rm"></i>Github
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <small>
                 Alinua 2017
             </small>
         </footer>

@@ -5,16 +5,16 @@
 <section ng-hide="loading" class="listing">
     <header>
         <h1>
-            <i class="fa fa-newspaper-o fa-fw"></i>
-            Annonces
+            <i class="fa fa-briefcase fa-fw"></i>
+            Projets
         </h1>
     </header>
 
-    <article ng-if="jobs.length == 0" class="center important">
-        Aucune annonce
+    <article ng-if="projects.length == 0" class="center important">
+        Aucun projet
     </article>
 
-    <aside>
+    <aside ng-show="projects.length > 0">
         <div class="filters">
             <span>
                 <label><i class="fa fa-sort fa-fw"></i>Trier</label>
@@ -39,25 +39,32 @@
         </div>
     </aside>
 
-    <article ng-repeat="job in jobs | orderBy:order:reverse | filter:search">
+    <article ng-show="projects.length > 0" ng-repeat="project in projects | orderBy:order:reverse | filter:search">
         <header>
             <h1>
-                <a href="#!/jobs/{{ job.id }}">{{ job.title }}</a>
+                <a href="#!/projects/{{ project.id }}">{{ project.title }}</a>
             </h1>
         </header>
 
-        <aside ng-show="job.description.content">
+        <aside ng-show="project.description.content">
             <p>
-                {{ job.description.content | limitTo:255 }}
-                <span ng-if="job.description.content.length > 255">...</span>
+                {{ project.description.content | limitTo:255 }}
+                <span ng-if="project.description.content.length > 255">...</span>
             </p>
         </aside>
 
-        <footer ng-show="job.location">
+        <footer ng-show="project.members.length > 0">
             <ul>
                 <li>
-                    <i class="fa fa-map-marker fa-fw"></i>
-                    {{ job.location.name }}
+                    <i class="fa fa-users fa-fw"></i>
+                    {{ project.members.length }} member(s)
+                </li>
+                <li>
+                    <i class="fa fa-globe fa-fw"></i>
+                    <a href="{{ project.description.url }}">
+                        {{ project.description.url | limitTo:80 }}
+                        <span ng-if="project.description.url.length > 80">...</span>
+                    </a>
                 </li>
             </ul>
         </footer>

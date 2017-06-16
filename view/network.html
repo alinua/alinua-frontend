@@ -1,41 +1,54 @@
-<section>
+<section ng-show="loading" class="center loading">
+    <i class="fa fa-fw fa-5x fa-spinner fa-pulse"></i>
+</section>
+
+<section ng-hide="loading" class="listing cards">
+    <header>
+        <h1>
+            <i class="fa fa-users fa-fw"></i>
+            Réseau
+        </h1>
+    </header>
+
+    <article ng-if="users.length == 0" class="center important">
+        Aucun utilisateur
+    </article>
+
     <aside>
-        <div class="filters" ng-hide="loading">
+        <div class="filters">
             <span>
-                <label><i class="fa fa-sort fa-fw"></i>Sort</label>
+                <label><i class="fa fa-sort fa-fw"></i>Trier</label>
                 <select ng-model='order'>
-                    <option value="lastName">last name</option>
-                    <option value="firstName">first name</option>
+                    <option value="lastName">Nom</option>
+                    <option value="firstName">Prénom</option>
                 </select>
             </span>
 
             <span>
-                <label><i class="fa fa-sort-amount-asc fa-fw"></i>Order</label>
+                <label><i class="fa fa-sort-amount-asc fa-fw"></i>Ordonner</label>
                 <select ng-model='reverse'>
-                    <option ng-value="true">ascending</option>
-                    <option ng-value="false">descending</option>
+                    <option ng-value="true">Croissant</option>
+                    <option ng-value="false">Décroissant</option>
                 </select>
             </span>
 
             <span>
                 <label><i class="fa fa-search fa-fw"></i></label>
-                <input type="search" class="form-control" placeholder="Search..." ng-model="search" />
+                <input type="search" class="form-control" placeholder="Filtrer" ng-model="search" />
             </span>
         </div>
     </aside>
-</section>
 
-<section class="listing cards">
     <article ng-repeat="user in users | orderBy:order:reverse | filter:search as results">
         <aside>
-            <i ng-hide="user.profile.pictureUrl" class="fa fa-address-card fa-4x fa-fw"></i>
             <img ng-show="user.profile.pictureUrl" data-ng-src="{{ user.profile.pictureUrl }}" />
+            <img ng-hide="user.profile.pictureUrl" data-ng-src="static/img/user.jpg" />
         </aside>
 
         <aside>
             <header>
                 <h1>
-                    <a href="#!/network/user/{{ user.profile.id }}">
+                    <a href="#!/network/{{ user.profile.id }}">
                         {{ user.profile.firstName }} {{ user.profile.lastName | uppercase }}
                     </a>
                 </h1>

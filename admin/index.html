@@ -25,8 +25,8 @@
         <!-- Website appearance -->
         <link rel="stylesheet" href="../static/css/reset.css" />
         <link rel="stylesheet" href="../static/css/font-awesome.min.css" />
-        <link rel="stylesheet" href="../static/css/layout.css" />
-        <!-- <link rel="stylesheet" href="../static/css/admin.css" /> -->
+        <!-- <link rel="stylesheet" href="../static/css/layout.css" /> -->
+        <link rel="stylesheet" href="../static/css/admin.css" />
 
         <!-- Javascripts -->
         <script src="../static/js/jquery.min.js"></script>
@@ -48,7 +48,7 @@
         <header>
             <h1>
                 <a href="#!/">
-                    <i class="fa fa-paper-plane fa-fw"></i>AlinUA
+                    <i class="fa fa-paper-plane"></i>AlinUA
                 </a>
             </h1>
         </header>
@@ -58,22 +58,22 @@
             <ul>
                 <li>
                     <a href="#!/">
-                        <i class="fa fa-cogs fa-lw"></i>Administration
+                        <i class="fa fa-cogs fa-fw"></i>Administration
                     </a>
                 </li>
                 <li>
                     <a href="#!/users">
-                        <i class="fa fa-address-book fa-lw"></i>Users
+                        <i class="fa fa-address-book fa-fw"></i>Utilisateurs
                     </a>
                 </li>
                 <li>
                     <a href="#!/jobs">
-                        <i class="fa fa-newspaper-o fa-lw"></i>Jobs
+                        <i class="fa fa-newspaper-o fa-fw"></i>Annonces
                     </a>
                 </li>
                 <li>
                     <a href="..">
-                        <i class="fa fa-globe fa-lw"></i>Website
+                        <i class="fa fa-globe fa-fw"></i>Site web
                     </a>
                 </li>
             </ul>
@@ -83,6 +83,13 @@
         <main ng-view>
             <!-- May the void be with you -->
         </main>
+
+        <!-- Footer -->
+        <footer>
+            <small>
+                Alinua 2017
+            </small>
+        </footer>
     </body>
 </html>
 

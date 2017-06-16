@@ -1,7 +1,7 @@
 <section class="card">
     <aside>
-        <i ng-hide="user.profile.pictureUrl" class="fa fa-address-card fa-5x fa-fw"></i>
         <img ng-show="user.profile.pictureUrl" data-ng-src="{{ user.profile.pictureUrl }}" />
+        <img ng-hide="user.profile.pictureUrl" data-ng-src="static/img/user.jpg" />
     </aside>
 
     <header>
@@ -88,5 +88,15 @@
                 </ul>
             </footer>
         </aside>
+    </article>
+
+    <article ng-if="user.projects.length > 0">
+        <header>
+            <h1>Projets</h1>
+        </header>
+
+        <ul ng-repeat="project in user.projects">
+            <li>{{ project.title }}</li>
+        </ul>
     </article>
 </section>

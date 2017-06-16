@@ -1,18 +1,18 @@
 <section class="listing">
     <article ng-show="users">
         <header>
-            <h1>Registered users</h1>
+            <h1>Utilisateurs inscrits</h1>
         </header>
 
         <aside class="grid">
             <div class="header">
                 <span class="full">
-                    Name
+                    Nom
                 </span>
                 <span class="center">
                 </span>
                 <span class="center">
-                    Register
+                    Inscription
                 </span>
                 <span class="center">
                     Status
@@ -26,7 +26,7 @@
                     </a>
                 </span>
                 <span class="center">
-                    <a href="../#!/network/user/{{ user.profile.id }}">
+                    <a href="../#!/network/{{ user.profile.id }}">
                         <i class="fa fa-eye fa-fw"></i></a>
                     <a ng-click="onChangeStatus(user.profile.id, true)">
                         <i class="fa fa-check fa-fw"></i></a>
@@ -37,10 +37,10 @@
                     {{ user.register }}
                 </span>
                 <span ng-if="user.status" class="allow">
-                    <i class="fa fa-check-circle fa-fw"></i>Allow
+                    <i class="fa fa-check-circle fa-fw"></i>Autorisé
                 </span>
                 <span ng-if="!user.status" class="disallow">
-                    <i class="fa fa-times-circle fa-fw"></i>Disallow
+                    <i class="fa fa-times-circle fa-fw"></i>Non autorisé
                 </span>
             </div>
         </aside>

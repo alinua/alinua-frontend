@@ -10,12 +10,13 @@ angular
         'ngCookies',
         'satellizer',
         'home',
-        'error',
         'job',
         'user',
         'inbox',
-        'admin-job',
-        'admin-user',
+        'error',
+        'project',
+        // 'admin-job',
+        // 'admin-user',
     ])
     .config([
         '$locationProvider',
@@ -84,7 +85,7 @@ angular
                 })
                 .when('/profile', {
                     templateUrl: 'view/user.html',
-                    controller: 'ProfileController',
+                    controller: 'UserController',
                     resolve: {
                         loginRequired: loginRequired
                     }
@@ -98,31 +99,34 @@ angular
                 })
                 .when('/jobs', {
                     templateUrl: 'view/jobs.html',
-                    controller: 'JobsController',
+                    controller: 'JobsController'
+                })
+                .when('/jobs/edit', {
+                    templateUrl: 'view/actions/job.html',
+                    controller: 'JobEditController',
                     resolve: {
                         loginRequired: loginRequired
                     }
                 })
-                .when('/jobs/job/:id', {
+                .when('/jobs/:id', {
                     templateUrl: 'view/job.html',
-                    controller: 'JobController',
-                    resolve: {
-                        loginRequired: loginRequired
-                    }
+                    controller: 'JobController'
                 })
                 .when('/network', {
                     templateUrl: 'view/network.html',
-                    controller: 'UsersController',
-                    resolve: {
-                        loginRequired: loginRequired
-                    }
+                    controller: 'NetworkController'
                 })
-                .when('/network/user/:id', {
+                .when('/network/:id', {
                     templateUrl: 'view/user.html',
-                    controller: 'UserController',
-                    resolve: {
-                        loginRequired: loginRequired
-                    }
+                    controller: 'UserController'
+                })
+                .when('/projects', {
+                    templateUrl: 'view/projects.html',
+                    controller: 'ProjectsController'
+                })
+                .when('/projects/:id', {
+                    templateUrl: 'view/project.html',
+                    controller: 'ProjectController'
                 })
                 .when('/error/:id', {
                     templateUrl: 'view/error.html',
