@@ -4,7 +4,11 @@
             <h1>Utilisateurs inscrits</h1>
         </header>
 
-        <aside class="grid">
+        <article ng-if="users.length == 0" class="center important">
+            Aucun utilisateur
+        </article>
+
+        <aside ng-if="users.length > 0" class="grid">
             <div class="header">
                 <span class="full">
                     Nom
@@ -26,12 +30,8 @@
                     </a>
                 </span>
                 <span class="center">
-                    <a href="../#!/network/{{ user.profile.id }}">
-                        <i class="fa fa-eye fa-fw"></i></a>
-                    <a ng-click="onChangeStatus(user.profile.id, true)">
-                        <i class="fa fa-check fa-fw"></i></a>
-                    <a ng-click="onChangeStatus(user.profile.id, false)">
-                        <i class="fa fa-remove fa-fw"></i></a>
+                    <a ng-click="onChangeStatus(user.profile.id, true)"><i class="fa fa-eye fa-fw"></i></a>
+                    <a ng-click="onChangeStatus(user.profile.id, false)"><i class="fa fa-eye-slash fa-fw"></i></a>
                 </span>
                 <span class="center">
                     {{ user.register }}
@@ -49,9 +49,11 @@
     <article ng-if="show_data">
         <header>
             <h1>{{ data.profile.firstName }} {{ data.profile.lastName | uppercase }}</h1>
-            <h2>{{ data.profile.headline }}</h2>
         </header>
 
+        <p ng-show="data.profile.headline">
+            {{ data.profile.headline }}
+        </p>
         <p ng-show="data.profile.summary">
             {{ data.profile.summary }}
         </p>

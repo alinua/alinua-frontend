@@ -31,6 +31,72 @@ app.controller('AlinuaController',
     var identifier = $cookies.get("alinua_user");
 
     /* -----------------------------------
+     *  Request users
+     * ----------------------------------- */
+
+    // Request users list from server
+    $http.get(server + "/users").then(
+        function(response) {
+            $scope.users = [];
+
+            for(user in response.data) {
+                if(response.data[user].status)
+                    $scope.users.push(response.data[user]);
+            }
+
+            $scope.loading = false;
+        },
+        function(response) {
+            $location.path("/error/" + (
+                response.status == -1 ? "503" : response.status));
+        }
+    );
+
+    /* -----------------------------------
+     *  Request jobs
+     * ----------------------------------- */
+
+    // Request jobs list from server
+    $http.get(server + "/jobs").then(
+        function(response) {
+            $scope.jobs = [];
+
+            for(job in response.data) {
+                if(response.data[job].status)
+                    $scope.jobs.push(response.data[job]);
+            }
+
+            $scope.loading = false;
+        },
+        function(response) {
+            $location.path("/error/" + (
+                response.status == -1 ? "503" : response.status));
+        }
+    );
+
+    /* -----------------------------------
+     *  Request projects
+     * ----------------------------------- */
+
+    // Request projects list from server
+    $http.get(server + "/projects").then(
+        function(response) {
+            $scope.projects = [];
+
+            for(project in response.data) {
+                if(response.data[project].status)
+                    $scope.projects.push(response.data[project]);
+            }
+
+            $scope.loading = false;
+        },
+        function(response) {
+            $location.path("/error/" + (
+                response.status == -1 ? "503" : response.status));
+        }
+    );
+
+    /* -----------------------------------
      *  Functions
      * ----------------------------------- */
 
@@ -48,6 +114,9 @@ app.controller('AlinuaController',
             $scope.user = data.user;
             $scope.unread = data.unread;
             $scope.messages = data.messages;
+
+            // Debug mode for linkedin api
+            $window.localStorage.linkedin_state = "STATE";
 
             // Set authenticate token
             $auth.setToken(data.token);
@@ -123,6 +192,9 @@ app.controller('AlinuaController',
         $http.get(server + "/users/user/" + identifier).then(
             function(response) {
                 $scope.user = response.data;
+
+                if(!JSON.parse($scope.user).status)
+                    $scope.logout();
             },
             function(response) {
                 // Define HTTP status code from response
@@ -133,7 +205,7 @@ app.controller('AlinuaController',
         );
 
         // Request user messages
-        $http.get(server + "/inbox/user/" + identifier).then(
+        $http.get(server + "/inbox/" + identifier).then(
             function(response) {
                 var unread = 0;
                 var messages = response.data;

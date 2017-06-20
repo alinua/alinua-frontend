@@ -67,7 +67,7 @@ app.controller('JobsController',
  *  This page need to be authenticated to access
  * -------------------------------------------------------------------------- */
 app.controller('JobController',
-    function($auth, $cookies, $http, $location, $routeParams, $scope) {
+    function($auth, $cookies, $http, $location, $routeParams, $scope, $route) {
 
     /* -----------------------------------
      *  Variables
@@ -76,7 +76,7 @@ app.controller('JobController',
     $scope.loading = true;
 
     // Get cookie content
-    // var identifier = $cookies.get("alinua_user");
+    $scope.identifier = $cookies.get("alinua_user");
 
     /* -----------------------------------
      *  Request data
@@ -89,14 +89,42 @@ app.controller('JobController',
             $scope.loading = false;
 
             $scope.owner = false;
-            // if(response.data.user.profile.id === identifier)
-                // $scope.owner = true;
+            if(response.data.owner.profile.id == $scope.identifier)
+                $scope.owner = true;
         },
         function(response) {
             $location.path("/error/" + (
                 response.status == -1 ? "503" : response.status));
         }
     );
+
+    $scope.onDelete = function(identifier) {
+        if(confirm("Voulez-vous vraiment supprimer cette annonce ?")) {
+
+            data = {
+                id: identifier
+            };
+
+            // Send a submit request to server
+            $http.post("http://localhost:3000/jobs/delete", data).then(
+                function(result) {
+                    // Server accept data and remove project
+                    if(result.data) {
+                        $location.path("/jobs");
+
+                        $route.reload();
+                    }
+
+                    // Server refuse to update project
+                    else
+                        $location.path("/error/500");
+                },
+                function(error) {
+                    console.error(error);
+                }
+            );
+        }
+    };
 });
 
 /* --------------------------------------------------------------------------
@@ -104,8 +132,10 @@ app.controller('JobController',
  *
  *  Edit job informations
  *
+ *  /jobs/new
+ *      Create a job
  *  /jobs/edit
- *      Edit or create a job
+ *      Edit a job
  *
  *  Notes
  *  -----
@@ -118,14 +148,39 @@ app.controller('JobEditController',
     if(!$auth.isAuthenticated())
         $location.path('/error/401');
 
+    // Get cookie content
+    $scope.identifier = $cookies.get("alinua_user");
+
     /* -----------------------------------
      *  Variables
      * ----------------------------------- */
 
-    console.debug($scope);
+    $scope.edit = false;
 
-    // Get cookie content
-    // var identifier = $cookies.get("alinua_user");
+    // Check mode
+    if($location.$$url != "/jobs/new") {
+        if($routeParams.id == undefined) {
+            $location.path("/error/404");
+        }
+
+        // Request job informations from server
+        $http.get(server + "/jobs/job/" + $routeParams.id).then(
+            function(response) {
+                if(response.data.owner.profile.id != $scope.identifier)
+                    $location.path("/error/401");
+
+                $scope.job = response.data;
+                $scope.edit = true;
+
+                // Join tags values with spaces
+                $scope.job.description.tags = $scope.job.description.tags.join(' ');
+            },
+            function(response) {
+                $location.path("/error/" + (
+                    response.status == -1 ? "503" : response.status));
+            }
+        );
+    }
 
     /* -----------------------------------
      *  Form
@@ -151,18 +206,15 @@ app.controller('JobEditController',
         // Form is valid
         if(form.$valid) {
             // Send a submit request to server
-            $http.post("http://localhost:3000/jobs/job/" + $routeParams.id +
-                "/edit", data).then(
+            $http.post("http://localhost:3000/jobs/edit", data).then(
                 function(result) {
                     // Server accept data and update job
-                    if(result.data) {
-                        // Redirect to job informations page
-                        $location.path("/jobs/job/" + $routeParams.id);
-                    }
+                    if(result.data)
+                        $location.path("/jobs");
+
                     // Server refuse to update job
-                    else {
+                    else
                         $location.path("/error/500");
-                    }
                 },
                 function(error) {
                     console.error(error);

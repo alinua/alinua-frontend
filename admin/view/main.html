@@ -4,7 +4,11 @@
             <h1>Dernier utilisateurs</h1>
         </header>
 
-        <aside class="grid">
+        <article ng-if="users.length == 0" class="center important">
+            Aucun utilisateur
+        </article>
+
+        <aside ng-if="users.length > 0" class="grid">
             <div class="header">
                 <span class="full">
                     Nom
@@ -39,7 +43,11 @@
             <h1>Dernières annonces</h1>
         </header>
 
-        <aside class="grid">
+        <article ng-if="jobs.length == 0" class="center important">
+            Aucune annonce
+        </article>
+
+        <aside ng-if="jobs.length > 0" class="grid">
             <div class="header">
                 <span class="full">
                     Titre
@@ -60,7 +68,7 @@
                     {{ job.title }}
                 </span>
                 <span class="center">
-                    {{ job.user.profile.firstName }} {{ job.user.profile.lastName | uppercase }}
+                    {{ job.owner.profile.firstName }} {{ job.owner.profile.lastName | uppercase }}
                 </span>
                 <span class="center">
                     {{ job.date }}
@@ -69,6 +77,51 @@
                     <i class="fa fa-check-circle fa-fw"></i>Allow
                 </span>
                 <span ng-if="!job.status" class="disallow">
+                    <i class="fa fa-times-circle fa-fw"></i>Disallow
+                </span>
+            </div>
+        </aside>
+    </article>
+
+    <article>
+        <header>
+            <h1>Derniers projets</h1>
+        </header>
+
+        <article ng-if="projects.length == 0" class="center important">
+            Aucun projet
+        </article>
+
+        <aside ng-if="projects.length > 0" class="grid">
+            <div class="header">
+                <span class="full">
+                    Titre
+                </span>
+                <span class="center">
+                    Auteur
+                </span>
+                <span class="center">
+                    Publication
+                </span>
+                <span class="center">
+                    Status
+                </span>
+            </div>
+
+            <div ng-repeat="project in projects | orderBy:published:true | limitTo:5">
+                <span>
+                    {{ project.title }}
+                </span>
+                <span class="center">
+                    {{ project.owner.profile.firstName }} {{ project.owner.profile.lastName | uppercase }}
+                </span>
+                <span class="center">
+                    {{ project.date }}
+                </span>
+                <span ng-if="project.status" class="allow">
+                    <i class="fa fa-check-circle fa-fw"></i>Allow
+                </span>
+                <span ng-if="!project.status" class="disallow">
                     <i class="fa fa-times-circle fa-fw"></i>Disallow
                 </span>
             </div>

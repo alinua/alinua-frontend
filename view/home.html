@@ -10,7 +10,21 @@
     </aside>
 </section>
 
-<section class="banner">
+<section class="banner banner-jobs" ng-if="jobs.length > 0">
+    <header>
+        <h1>Les dernières annonces publiées</h1>
+    </header>
+
+    <aside>
+        <ul ng-repeat="job in jobs | orderBy:date:true | limitTo:5">
+            <li>
+                <a href="#!/jobs/{{ job.id }}">{{ job.title }}</a>
+            </li>
+        </ul>
+    </aside>
+</section>
+
+<section class="banner banner-infos">
     <header>
         <h1>Une plateforme étudiante</h1>
     </header>
@@ -18,22 +32,28 @@
     <aside class="grid homogeneous">
         <div>
             <span>
-                <p>
-                    <i class="fa fa-briefcase fa-5x fa-fw"></i><br />
-                    <b>Découvrez les projets des autres étudiants</b>
-                </p>
+                <a href="#!/jobs">
+                    <p>
+                        <i class="fa fa-newspaper-o fa-5x fa-fw"></i><br />
+                        <b>Suivez les dernières annonces de jobs</b>
+                    </p>
+                </a>
             </span>
             <span>
-                <p>
-                    <i class="fa fa-newspaper-o fa-5x fa-fw"></i><br />
-                    <b>Suivez les dernières annonces de jobs</b>
-                </p>
+                <a href="#!/projects">
+                    <p>
+                        <i class="fa fa-briefcase fa-5x fa-fw"></i><br />
+                        <b>Découvrez les projets des autres étudiants</b>
+                    </p>
+                </a>
             </span>
             <span>
-                <p>
-                    <i class="fa fa-address-book fa-5x fa-fw"></i><br />
-                    <b>Importez facilement votre profil depuis LinkedIn</b>
-                </p>
+                <a href="#!/network">
+                    <p>
+                        <i class="fa fa-address-book fa-5x fa-fw"></i><br />
+                        <b>Importez facilement votre profil depuis LinkedIn</b>
+                    </p>
+                </a>
             </span>
         </div>
     </aside>

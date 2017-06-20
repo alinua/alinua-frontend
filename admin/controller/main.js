@@ -40,4 +40,17 @@ app.controller('MainController',
             $location.path("/error/" + id);
         }
     );
+
+    // Request projects informations from server
+    $http.get(server + "/projects").then(
+        function(response) {
+            $scope.projects = response.data;
+        },
+        function(response) {
+            // Define HTTP status code from response
+            var id = (response.status == -1 ? "503" : response.status);
+
+            $location.path("/error/" + id);
+        }
+    );
 });

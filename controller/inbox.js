@@ -18,7 +18,7 @@ var server = "http://localhost:3000";
  *  This page need to be authenticated to access
  * -------------------------------------------------------------------------- */
 app.controller('InboxController',
-    function($auth, $cookies, $http, $location, $scope) {
+    function($auth, $cookies, $http, $location, $scope, $route) {
 
     // Check login status
     if(!$auth.isAuthenticated())
@@ -45,9 +45,14 @@ app.controller('InboxController',
     // CHange message status when user click on icon
     $scope.mark = function(message) {
         // Request user informations from server
-        $http.get(server + "/inbox/user/" + identifier + "/" + message.id + "/status").then(
+        $http.get(server + "/inbox/status/" + identifier + "/" + message.id).then(
             function(response) {
-                $scope.messages[message.id].status = response.data.status;
+                for(element in $scope.messages) {
+                    if($scope.messages[element].id == message.id) {
+                        $scope.messages[element].status = response.data.status;
+                        break;
+                    }
+                }
 
                 // Update navigation bar
                 if(response.data.status)
@@ -62,11 +67,37 @@ app.controller('InboxController',
         );
     };
 
+    $scope.onDelete = function(identifier) {
+        if(confirm("Voulez-vous vraiment supprimer ce message ?")) {
+
+            data = {
+                id: identifier
+            };
+
+            // Send a submit request to server
+            $http.post("http://localhost:3000/inbox/delete", data).then(
+                function(result) {
+                    // Server accept data and remove message
+                    if(result.data) {
+                        $route.reload();
+                    }
+
+                    // Server refuse to remove message
+                    else
+                        $location.path("/error/500");
+                },
+                function(error) {
+                    console.error(error);
+                }
+            );
+        }
+    };
+
     /* -----------------------------------
      *  Request data
      * ----------------------------------- */
 
-    $http.get(server + "/inbox/user/" + identifier).then(
+    $http.get(server + "/inbox/" + identifier).then(
         function(response) {
             $scope.messages = response.data;
 
@@ -84,6 +115,3 @@ app.controller('InboxController',
         }
     );
 });
-
-
-

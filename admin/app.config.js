@@ -11,6 +11,7 @@ angular
         'jobs',
         'users',
         'error',
+        'projects'
     ])
     .config([
         '$locationProvider',
@@ -39,6 +40,10 @@ angular
                 .when('/users', {
                     templateUrl: 'view/users.html',
                     controller: 'UsersController',
+                })
+                .when('/projects', {
+                    templateUrl: 'view/projects.html',
+                    controller: 'ProjectsController',
                 })
                 .when('/error/:id', {
                     templateUrl: 'view/error.html',

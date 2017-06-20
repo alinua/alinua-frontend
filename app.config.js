@@ -14,9 +14,7 @@ angular
         'user',
         'inbox',
         'error',
-        'project',
-        // 'admin-job',
-        // 'admin-user',
+        'project'
     ])
     .config([
         '$locationProvider',
@@ -83,6 +81,12 @@ angular
                     templateUrl: 'view/home.html',
                     controller: 'HomeController',
                 })
+                .when('/about', {
+                    templateUrl: 'view/about.html'
+                })
+                .when('/help', {
+                    templateUrl: 'view/help.html'
+                })
                 .when('/profile', {
                     templateUrl: 'view/user.html',
                     controller: 'UserController',
@@ -101,7 +105,14 @@ angular
                     templateUrl: 'view/jobs.html',
                     controller: 'JobsController'
                 })
-                .when('/jobs/edit', {
+                .when('/jobs/new', {
+                    templateUrl: 'view/actions/job.html',
+                    controller: 'JobEditController',
+                    resolve: {
+                        loginRequired: loginRequired
+                    }
+                })
+                .when('/jobs/edit/:id', {
                     templateUrl: 'view/actions/job.html',
                     controller: 'JobEditController',
                     resolve: {
@@ -123,6 +134,20 @@ angular
                 .when('/projects', {
                     templateUrl: 'view/projects.html',
                     controller: 'ProjectsController'
+                })
+                .when('/projects/new', {
+                    templateUrl: 'view/actions/project.html',
+                    controller: 'ProjectEditController',
+                    resolve: {
+                        loginRequired: loginRequired
+                    }
+                })
+                .when('/projects/edit/:id', {
+                    templateUrl: 'view/actions/project.html',
+                    controller: 'ProjectEditController',
+                    resolve: {
+                        loginRequired: loginRequired
+                    }
                 })
                 .when('/projects/:id', {
                     templateUrl: 'view/project.html',

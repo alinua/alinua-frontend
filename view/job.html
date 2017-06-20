@@ -32,7 +32,7 @@
 
         <h3>
             <ul class="tags">
-                <li ng-repeat="tag in job.tags">
+                <li ng-repeat="tag in job.description.tags">
                     {{ tag }}
                 </li>
             </ul>
@@ -42,18 +42,26 @@
     <nav class="job-nav">
         <ul>
             <li ng-if="owner">
-                <a href="">
+                <a href="#!/jobs/edit/{{ job.id }}">
                     <i class="fa fa-edit fa-lw"></i>Edit
                 </a>
             </li>
 
             <li ng-if="owner">
-                <a href="">
+                <a ng-click="onDelete(job.id)">
                     <i class="fa fa-remove fa-lw"></i>Remove
                 </a>
             </li>
         </ul>
     </nav>
+
+    <article ng-show="job.validity">
+        <header>
+            <h1>Date de validité de l'annonce</h1>
+        </header>
+
+        <p>Cette annonce est valide jusqu'au <b>{{ job.validity }}</b></p>
+    </article>
 
     <article ng-show="job.description.lead || job.description.content">
         <header>

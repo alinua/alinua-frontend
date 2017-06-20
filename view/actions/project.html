@@ -1,0 +1,35 @@
+<section>
+    <header>
+        <h1>Projet</h1>
+    </header>
+
+    <article>
+        <aside ng-show="!edit" class="note">
+            <p>
+                Un administrateur vérifiera votre projet avant de la mettre en ligne.
+            </p>
+        </aside>
+
+        <form name="form" ng-submit="submit(form)">
+            <input type="hidden" name="owner" value="{{ identifier }}" />
+            <input ng-if="project.id != undefined" type="hidden" name="id" value="{{ project.id }}" />
+
+            <span>
+                <label>Titre</label>
+                <input type="text" name="title" value="{{ project.title }}" required autofocus />
+            </span>
+
+            <span>
+                <label>Description</label>
+                <textarea name="description" required>{{ project.description.content }}</textarea>
+            </span>
+
+            <span>
+                <label>Hyperlien</label>
+                <input type="url" name="url" value="{{ project.description.url }}" required />
+            </span>
+
+            <input type="submit" value="Soumettre" />
+        </form>
+    </article>
+</section>

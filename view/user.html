@@ -96,7 +96,7 @@
         </header>
 
         <ul ng-repeat="project in user.projects">
-            <li>{{ project.title }}</li>
+            <li><a href="#!/projects/{{ project.id }}">{{ project.title }}</a></li>
         </ul>
     </article>
 </section>

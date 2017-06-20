@@ -8,10 +8,6 @@
             <i class="fa fa-inbox fa-fw"></i>
             Inbox
         </h1>
-
-        <h2 ng-if="messages.length > 0">
-            {{ messages.length }} message(s)
-        </h2>
     </header>
 
     <article ng-if="messages.length == 0" class="center important">
@@ -22,16 +18,16 @@
         <aside class="grid">
             <div ng-repeat="message in messages | orderBy:date:true">
                 <span class="center">
-                    <a ng-click="mark(message)">
-                        <i ng-if="message.status" class="fa fa-envelope-open-o fa-fw"></i>
-                        <i ng-if="!message.status" class="fa fa-envelope-o fa-fw"></i>
-                    </a>
+                    <a ng-click="mark(message)"><i ng-if="message.status" class="fa fa-envelope-open-o fa-fw"></i><i ng-if="!message.status" class="fa fa-envelope-o fa-fw"></i></a>
                 </span>
-                <span>
+                <span class="full">
                     <a ng-click="show(message)">
                         {{ message.data.title | limitTo: 28 }}
                         <em ng-if="message.data.title.length > 28">...</em>
                     </a>
+                </span>
+                <span class="center">
+                    <a ng-click="onDelete(message.id)"><i class="fa fa-remove"></i></a>
                 </span>
             </div>
         </aside>

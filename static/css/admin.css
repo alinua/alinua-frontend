@@ -96,6 +96,17 @@ body > main > section > article {
     margin-bottom: 32px;
 }
 
+body > main > section > article > p,
+body > main > section > article > ul {
+    padding: 16px;
+
+    list-style: none;
+}
+
+body > main > section > article > ul > li {
+    margin-bottom: 8px;
+}
+
 body > main > section > article > header {
     margin-bottom: 8px;
 

@@ -142,9 +142,17 @@ body > footer {
 }
 
 body > footer > small {
+    color: grey;
+
     font-style: oblique;
+}
+
+body > footer > header > h1 {
+    margin-bottom: 8px;
 
     color: grey;
+
+    font-size: 12pt;
 }
 
 /* Footer listing */
@@ -590,13 +598,14 @@ body > main > section > article {
 }
 
 .job-nav > ul > li > a {
-    padding: 8px 12px;
+    margin-right: 8px;
+    padding: 8px 16px;
 
     color: rgb(40, 130, 173);
     background-color: white;
 
-    border-radius: 4px;
-    box-shadow: 0 0 2px rgba(80, 80, 80, 0.5);
+    border-radius: 42px;
+    box-shadow: 0 2px 4px rgba(20, 20, 20, 0.5);
 
     white-space: nowrap;
 }
@@ -604,6 +613,8 @@ body > main > section > article {
 .job-nav > ul > li > a:hover {
     color: white;
     background-color: rgb(40, 130, 173);
+
+    box-shadow: 0 0 4px rgba(20, 20, 20, 0.6) inset;
 }
 
 /* --------------------------------------------------------------------------
@@ -635,6 +646,74 @@ body > main > section > article {
     background: no-repeat left/cover url("../img/banner.png");
 }
 
+.banner-jobs {
+    background-color: #9CAF40;
+}
+
+.banner-jobs > aside > ul {
+    width: 60%;
+    margin: 0 auto;
+
+    list-style: none;
+}
+
+.banner-jobs > aside > ul > li > a {
+    display: block;
+    margin-bottom: 16px;
+    padding: 16px;
+
+    color: #9CAF40;
+    background-color: white;
+    border: 2px solid white;
+
+    font-size: 16pt;
+
+    box-shadow: 0 2px 4px rgba(20, 20, 20, 0.5);
+    border-radius: 42px;
+}
+
+.banner-jobs > aside > ul > li > a:hover {
+    color: white;
+    background-color: #9CAF40;
+    border: 2px solid white;
+
+    box-shadow: 0 0 4px rgba(20, 20, 20, 0.6) inset;
+}
+
+.banner-infos {
+    background-color: #499384;
+}
+
+.banner-infos > aside > div > span {
+    width: 33%;
+}
+
+.banner-infos > aside > div > span > a {
+    display: block;
+    padding: 32px;
+
+    color: #499384;
+    background-color: white;
+    border: 2px solid white;
+
+    text-align: center;
+
+    white-space: word-wrap;
+
+    border-radius: 42px;
+    box-shadow: 0 2px 4px rgba(20, 20, 20, 0.5);
+}
+
+.banner-infos > aside > div > span > a:hover {
+    color: white;
+    background-color: #499384;
+    border: 2px solid white;
+
+    box-shadow: 0 0 4px rgba(20, 20, 20, 0.6) inset;
+
+    cursor: pointer;
+}
+
 .banner-register {
     background-color: #2882AD;
 }
@@ -646,8 +725,9 @@ body > main > section > article {
 
     color: #2882AD;
     background-color: white;
-
     border: 2px solid white;
+
+    box-shadow: 0 2px 4px rgba(20, 20, 20, 0.5);
     border-radius: 42px;
 }
 
@@ -656,12 +736,15 @@ body > main > section > article {
     background-color: #2882AD;
     border: 2px solid white;
 
+    box-shadow: 0 0 4px rgba(20, 20, 20, 0.6) inset;
+
     cursor: pointer;
 }
 
 .banner-register > aside > button > i {
     margin-right: 6px;
 }
+
 
 /* --------------------------------------------------------------------------
  *  Form
@@ -749,6 +832,26 @@ section > article > form > input[type="submit"]:hover {
     cursor: pointer;
 }
 
+section > article > form > span.separator {
+    height: 16px;
+}
+
+section > article > form > span > div > span > select {
+    margin: 0 16px 0 2px;
+    padding: 2px 8px;
+
+    color: rgb(40, 130, 173);
+    background-color: white;
+
+    border: 2px solid rgba(40, 130, 173, 0.2);
+
+    border-radius: 2px;
+}
+
+section > article > form > span > div > span > select:focus {
+    border: 2px solid rgb(40, 130, 173);
+}
+
 /* --------------------------------------------------------------------------
  *  Grid
  * -------------------------------------------------------------------------- */
@@ -758,7 +861,7 @@ section > article > form > input[type="submit"]:hover {
 
     margin: 0 auto;
 
-    border-spacing: 8px;
+    border-spacing: 16px;
 }
 
 .grid > div {
@@ -774,18 +877,7 @@ section > article > form > input[type="submit"]:hover {
     vertical-align: middle;
 }
 
-.homogeneous > div > span {
-    width: 25%;
-    padding: 32px;
-
-    background-color: white;
-
-    text-align: center;
-
-    white-space: word-wrap;
-}
-
-.grid > div > span > p > i {
+.grid > div > span > a > p > i {
     margin-bottom: 16px;
 }
 
@@ -810,6 +902,21 @@ section > article > form > input[type="submit"]:hover {
 .disallow { text-shadow: 0 1px 1px lightgrey; color: #ab4642; }
 
 .loading > i { margin: 32px 0; color: rgba(0, 0, 0, 0.2); }
+
+.note {
+    margin: 0 auto;
+    padding: 16px;
+
+    color: white;
+    background-color: #AB4642;
+
+    font-weight: 500;
+    text-align: center;
+
+    border-radius: 2px;
+
+    box-shadow: 0 2px 4px lightgrey;
+}
 
 /* --------------------------------------------------------------------------
  *  Responsive design

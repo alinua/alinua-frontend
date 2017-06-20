@@ -40,19 +40,34 @@ app.controller('UsersController',
     };
 
     $scope.onChangeStatus = function(id, status) {
-        // Request user informations from server
-        $http.get(server + "/users/user/" + id + "/status/" + status).then(
-            function(response) {
-                $scope.users[id].status = response.data.status;
 
-                $window.location.reload();
-            },
-            function(response) {
-                // Define HTTP status code from response
-                var id = (response.status == -1 ? "503" : response.status);
+        var user = undefined;
 
-                $location.path("/error/" + id);
+        for(element in $scope.users) {
+            if($scope.users[element].profile.id == id) {
+                user = element;
+                break;
             }
-        );
+        }
+
+        if(user != undefined) {
+            var data = {
+                "id": $scope.users[user].profile.id,
+                "status": status
+            };
+
+            // Request user informations from server
+            $http.post(server + "/users/edit", data).then(
+                function(response) {
+                    $scope.users[user].status = status;
+                },
+                function(response) {
+                    // Define HTTP status code from response
+                    var id = (response.status == -1 ? "503" : response.status);
+
+                    $location.path("/error/" + id);
+                }
+            );
+        }
     };
 });

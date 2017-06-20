@@ -3,7 +3,7 @@
  * -------------------------------------------------------------------------- */
 
 // Modules
-var app = angular.module("jobs", []);
+var app = angular.module("projects", []);
 
 // Server url
 var server = "http://localhost:3000";
@@ -12,15 +12,15 @@ var server = "http://localhost:3000";
  *
  *  Manage authenticate with localStorage and cookies usage
  */
-app.controller('JobsController',
-    function($scope, $window, $http, $location, $route) {
+app.controller('ProjectsController',
+    function($scope, $window, $http, $location) {
 
     $scope.show_data = false;
 
-    // Request jobs informations from server
-    $http.get(server + "/jobs").then(
+    // Request projects informations from server
+    $http.get(server + "/projects").then(
         function(response) {
-            $scope.jobs = response.data;
+            $scope.projects = response.data;
         },
         function(response) {
             // Define HTTP status code from response
@@ -37,9 +37,6 @@ app.controller('JobsController',
             $scope.show_data = true;
 
         $scope.data = data;
-
-        // Join tags values with spaces
-        $scope.data.description.tags = $scope.data.description.tags.join(' ');
     };
 
     $scope.onChangeStatus = function(id, status) {
@@ -49,11 +46,11 @@ app.controller('JobsController',
         };
 
         // Request user informations from server
-        $http.post(server + "/jobs/edit", data).then(
+        $http.post(server + "/projects/edit", data).then(
             function(response) {
-                for(element in $scope.jobs) {
-                    if($scope.jobs[element].id == id) {
-                        $scope.jobs[element].status = status;
+                for(element in $scope.projects) {
+                    if($scope.projects[element].id == id) {
+                        $scope.projects[element].status = status;
                         break;
                     }
                 }
@@ -65,30 +62,5 @@ app.controller('JobsController',
                 $location.path("/error/" + id);
             }
         );
-    };
-
-    $scope.onDelete = function(identifier) {
-        if(confirm("Voulez-vous vraiment supprimer cette annonce ?")) {
-
-            data = {
-                id: identifier
-            };
-
-            // Send a submit request to server
-            $http.post("http://localhost:3000/jobs/delete", data).then(
-                function(result) {
-                    // Server accept data and remove project
-                    if(result.data)
-                        $route.reload();
-
-                    // Server refuse to update project
-                    else
-                        $location.path("/error/500");
-                },
-                function(error) {
-                    console.error(error);
-                }
-            );
-        }
     };
 });

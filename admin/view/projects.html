@@ -1,14 +1,14 @@
 <section class="listing">
     <article>
         <header>
-            <h1>Annonces publiées</h1>
+            <h1>Projets publiées</h1>
         </header>
 
-        <article ng-if="jobs.length == 0" class="center important">
-            Aucune annonce
+        <article ng-if="projects.length == 0" class="center important">
+            Aucun projet
         </article>
 
-        <aside ng-if="jobs.length > 0" class="grid">
+        <aside ng-if="projects.length > 0" class="grid">
             <div class="header">
                 <span class="full">
                     Titre
@@ -26,27 +26,26 @@
                 </span>
             </div>
 
-            <div ng-repeat="job in jobs | orderBy:published:true">
+            <div ng-repeat="project in projects | orderBy:published:true">
                 <span>
-                    <a ng-click="show(job)">
-                        {{ job.title }}
+                    <a ng-click="show(project)">
+                        {{ project.title }}
                     </a>
                 </span>
                 <span class="center">
-                    <a ng-click="onChangeStatus(job.id, true)"><i class="fa fa-eye fa-fw"></i></a>
-                    <a ng-click="onChangeStatus(job.id, false)"><i class="fa fa-eye-slash fa-fw"></i></a>
-                    <a ng-click="onDelete(job.id)"><i class="fa fa-remove fa-fw"></i></a>
+                    <a ng-click="onChangeStatus(project.id, true)"><i class="fa fa-eye fa-fw"></i></a>
+                    <a ng-click="onChangeStatus(project.id, false)"><i class="fa fa-eye-slash fa-fw"></i></a>
                 </span>
                 <span class="center">
-                    {{ job.owner.profile.firstName }} {{ job.owner.profile.lastName | uppercase }}
+                    {{ project.owner.profile.firstName }} {{ project.owner.profile.lastName | uppercase }}
                 </span>
                 <span class="center">
-                    {{ job.date }}
+                    {{ project.date }}
                 </span>
-                <span ng-if="job.status" class="allow">
+                <span ng-if="project.status" class="allow">
                     <i class="fa fa-check-circle fa-fw"></i>Autorisée
                 </span>
-                <span ng-if="!job.status" class="disallow">
+                <span ng-if="!project.status" class="disallow">
                     <i class="fa fa-times-circle fa-fw"></i>Non autorisée
                 </span>
             </div>
@@ -57,11 +56,6 @@
         <header>
             <h1>{{ data.title }}</h1>
         </header>
-
-        <ul>
-            <li><b>Tags</b>: {{ data.description.tags }}</li>
-            <li><b>Date de validité</b>: {{ data.validity }}</li>
-        </ul>
 
         <p>
             {{ data.description.content }}

@@ -43,10 +43,6 @@
         <script src="controller/inbox.js"></script>
         <script src="controller/error.js"></script>
         <script src="controller/project.js"></script>
-<!--
-        <script src="controller/admin/user.js"></script>
-        <script src="controller/admin/job.js"></script>
--->
     </head>
 
     <body ng-controller="AlinuaController as main">
@@ -76,7 +72,7 @@
                     </li>
 
                     <li ng-if="isAuthenticated()" class="responsive">
-                        <a href="#!/jobs/edit" title="Créer une annonce">
+                        <a href="#!/jobs/new" title="Créer une annonce">
                             <i class="fa fa-plus fa-fw"></i><b>Créer une annonce</b>
                         </a>
                     </li>
@@ -90,7 +86,7 @@
                     </li>
 
                     <li ng-if="isAuthenticated()" class="responsive">
-                        <a href="#!/projects" title="Créer un projet">
+                        <a href="#!/projects/new" title="Créer un projet">
                             <i class="fa fa-plus fa-fw"></i><b>Créer un projet</b>
                         </a>
                     </li>
@@ -180,13 +176,13 @@
 
                 <ul>
                     <li>
-                        <a href="#!/">
+                        <a href="#!/about">
                             <i class="fa fa-star fa-fw fa-rm"></i>À propos
                         </a>
                     </li>
 
                     <li>
-                        <a href="#!/">
+                        <a href="#!/help">
                             <i class="fa fa-book fa-fw fa-rm"></i>Aide
                         </a>
                     </li>
