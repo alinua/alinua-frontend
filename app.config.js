@@ -8,6 +8,7 @@ angular
     .module('alinua', [
         'ngRoute',
         'ngCookies',
+        'ngSanitize',
         'satellizer',
         'home',
         'job',

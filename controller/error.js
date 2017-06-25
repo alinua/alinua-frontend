@@ -7,19 +7,14 @@
 // Modules
 var app = angular.module("error", []);
 
-/*  Errors controller
+/* --------------------------------------------------------------------------
+ *  Errors controller
  *
  *  Load error informations from his identifier
  *
- *  Parameters
- *  ----------
- *  id : int
- *      Error identifier
- *
- *  Notes
- *  -----
- *  Fetch data from /error/<id>
- */
+ *  /error/:id
+ *      Loading error message from url identifier
+ * -------------------------------------------------------------------------- */
 app.controller('ErrorController',
     function($scope, $http, $routeParams) {
 

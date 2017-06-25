@@ -33,7 +33,7 @@
             <h1>Description</h1>
         </header>
 
-        <p>{{ project.description.content }}</p>
+        <p ng-bind-html="project.description.content"></p>
     </article>
 
     <article ng-show="project.members">

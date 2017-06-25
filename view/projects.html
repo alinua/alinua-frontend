@@ -47,15 +47,13 @@
         </header>
 
         <aside ng-show="project.description.content">
-            <p>
-                {{ project.description.content | limitTo:255 }}
-                <span ng-if="project.description.content.length > 255">...</span>
-            </p>
+            <p ng-bind-html="project.description.content | limitTo:512">
+            </p><span ng-if="project.description.content.length > 512">...</span>
         </aside>
 
-        <footer ng-show="project.members.length > 0">
+        <footer ng-show="project.members.length > 0 || !(project.description.url == undefined)">
             <ul>
-                <li>
+                <li ng-if="project.members.length > 0">
                     <i class="fa fa-users fa-fw"></i>
                     {{ project.members.length }} member(s)
                 </li>

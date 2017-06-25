@@ -37,12 +37,12 @@ app.controller('InboxController',
      *  Functions
      * ----------------------------------- */
 
-    // Show message content when user click on title
+    // Show item content
     $scope.show = function(message) {
         $scope.message_data = message;
     };
 
-    // CHange message status when user click on icon
+    // Change item status
     $scope.mark = function(message) {
         // Request user informations from server
         $http.get(server + "/inbox/status/" + identifier + "/" + message.id).then(
@@ -67,6 +67,7 @@ app.controller('InboxController',
         );
     };
 
+    // Delete an item
     $scope.onDelete = function(identifier) {
         if(confirm("Voulez-vous vraiment supprimer ce message ?")) {
 

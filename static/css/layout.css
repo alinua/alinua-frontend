@@ -347,6 +347,7 @@ body > main > section > article {
 
 .listing > article > p,
 .listing > article > aside > p {
+    display: inline;
     margin: 8px auto;
 
     text-align: justify;
@@ -410,12 +411,12 @@ body > main > section > article {
     display: inline-block;
 
     margin: 4px;
-    padding: 6px 10px;
+    padding: 8px 16px;
 
     color: white;
     background-color: rgba(40, 130, 173, 0.6);
 
-    border-radius: 6px;
+    border-radius: 42px;
 
     font-size: 12pt;
     font-weight: 500;
@@ -604,7 +605,7 @@ body > main > section > article {
     color: rgb(40, 130, 173);
     background-color: white;
 
-    border-radius: 42px;
+    border-radius: 4px;
     box-shadow: 0 2px 4px rgba(20, 20, 20, 0.5);
 
     white-space: nowrap;

@@ -47,10 +47,8 @@
         </header>
 
         <aside ng-show="job.description.content">
-            <p>
-                {{ job.description.content | limitTo:255 }}
-                <span ng-if="job.description.content.length > 255">...</span>
-            </p>
+            <p ng-bind-html="job.description.content | limitTo:255"></p>
+            <span ng-if="job.description.content.length > 255">...</span>
         </aside>
 
         <footer ng-show="job.location">

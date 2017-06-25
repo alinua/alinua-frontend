@@ -13,11 +13,7 @@ var server = "http://localhost:3000";
 /* --------------------------------------------------------------------------
  *  Projects controller
  *
- *  Loading projects list (defautl sorting: date)
- *
- *  Notes
- *  -----
- *  This page need to be authenticated to access
+ *  Loading projects list (default sorting: date)
  * -------------------------------------------------------------------------- */
 app.controller('ProjectsController',
     function($auth, $http, $location, $scope) {

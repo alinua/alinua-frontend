@@ -13,11 +13,7 @@ var server = "http://localhost:3000";
 /* --------------------------------------------------------------------------
  *  Network controller
  *
- *  Loading users list (defautl sorting: last name)
- *
- *  Notes
- *  -----
- *  This page need to be authenticated to access
+ *  Loading users list (default sorting: last name)
  * -------------------------------------------------------------------------- */
 app.controller('NetworkController',
     function($auth, $http, $location, $scope) {

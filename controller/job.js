@@ -13,11 +13,7 @@ var server = "http://localhost:3000";
 /* --------------------------------------------------------------------------
  *  Jobs controller
  *
- *  Loading jobs list (defautl sorting: date)
- *
- *  Notes
- *  -----
- *  This page need to be authenticated to access
+ *  Loading jobs list (default sorting: date)
  * -------------------------------------------------------------------------- */
 app.controller('JobsController',
     function($auth, $http, $location, $scope) {
@@ -61,10 +57,6 @@ app.controller('JobsController',
  *
  *  /jobs/job/:id
  *      Loading informations from url identifier
- *
- *  Notes
- *  -----
- *  This page need to be authenticated to access
  * -------------------------------------------------------------------------- */
 app.controller('JobController',
     function($auth, $cookies, $http, $location, $routeParams, $scope, $route) {
@@ -173,7 +165,8 @@ app.controller('JobEditController',
                 $scope.edit = true;
 
                 // Join tags values with spaces
-                $scope.job.description.tags = $scope.job.description.tags.join(' ');
+                $scope.job.description.tags = \
+                    $scope.job.description.tags.join(' ');
             },
             function(response) {
                 $location.path("/error/" + (

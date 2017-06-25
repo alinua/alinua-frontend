@@ -63,12 +63,12 @@
         <p>Cette annonce est valide jusqu'au <b>{{ job.validity }}</b></p>
     </article>
 
-    <article ng-show="job.description.lead || job.description.content">
+    <article ng-show="job.description.content">
         <header>
             <h1>Description</h1>
         </header>
 
-        <p>{{ job.description.lead + " " }}{{ job.description.content }}</p>
+        <p ng-bind-html="job.description.content"></p>
     </article>
 
     <article ng-show="job.description.responsabilities">
