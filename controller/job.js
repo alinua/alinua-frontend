@@ -165,7 +165,7 @@ app.controller('JobEditController',
                 $scope.edit = true;
 
                 // Join tags values with spaces
-                $scope.job.description.tags = \
+                $scope.job.description.tags =
                     $scope.job.description.tags.join(' ');
             },
             function(response) {
